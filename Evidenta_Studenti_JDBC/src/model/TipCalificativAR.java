@@ -1,8 +1,6 @@
 package model;
 
-import com.sun.org.apache.xml.internal.dtm.ref.DTMDefaultBaseIterators;
-
-public enum TipCalificativ {
+public enum TipCalificativAR {
 //    INSUFICIENT("Insuficient"),
 //    SUFICIENT("Suficient"),
 //    BINE("Bine"),
@@ -12,7 +10,7 @@ public enum TipCalificativ {
     ADMIS("ADMIS"),
     RESPINS("RESPINS");
     private String denumire;
-    TipCalificativ(String denumire){
+    TipCalificativAR(String denumire){
         this.denumire = denumire;
     }
 

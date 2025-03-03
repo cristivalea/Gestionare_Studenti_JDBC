@@ -9,9 +9,9 @@ import java.util.Date;
 
 public class NotaCalificativ extends Nota{
 
-    private  TipCalificativ calificativ;
+    private TipCalificativAR calificativ;
 
-    public NotaCalificativ(TipNota tip_nota, String numar_matricol, int cod_disciplina, LocalDate data_examen, int promovat, TipCalificativ calificativ) {
+    public NotaCalificativ(TipNota tip_nota, String numar_matricol, int cod_disciplina, LocalDate data_examen, int promovat, TipCalificativAR calificativ) {
         super(tip_nota, numar_matricol, cod_disciplina, data_examen, promovat);
         this.calificativ = calificativ;
     }
@@ -27,11 +27,11 @@ public class NotaCalificativ extends Nota{
                 Date dataExamen = rezultat.getDate("Data_Examen");
                 LocalDate data_exemen_final = ((java.sql.Date) dataExamen).toLocalDate();
                 String nota_finala =  rezultat.getString("Valoare_Nota");
-                TipCalificativ cal = TipCalificativ.ADMIS;
-                if(nota_finala.equals(TipCalificativ.RESPINS.getDenumire())){
-                    cal = TipCalificativ.RESPINS;
-                } else if (nota_finala.equals(TipCalificativ.ADMIS.getDenumire())) {
-                    cal = TipCalificativ.ADMIS;
+                TipCalificativAR cal = TipCalificativAR.ADMIS;
+                if(nota_finala.equals(TipCalificativAR.RESPINS.getDenumire())){
+                    cal = TipCalificativAR.RESPINS;
+                } else if (nota_finala.equals(TipCalificativAR.ADMIS.getDenumire())) {
+                    cal = TipCalificativAR.ADMIS;
                 }
                 int promovat = rezultat.getInt("Promovat");
                 NotaCalificativ nota = new NotaCalificativ(TipNota.A, nrMat, codDsiciplina, data_exemen_final, promovat, cal);
@@ -50,7 +50,7 @@ public class NotaCalificativ extends Nota{
         return false;
     }
 
-    public TipCalificativ getNotaFinala(){
+    public TipCalificativAR getNotaFinala(){
         return calificativ;
     }
     @Override
