@@ -1,7 +1,5 @@
 package model;
 
-import model.Disciplina;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -35,7 +33,7 @@ public class Main {
     }
 
     public static void main(String[] args){
-       ArrayList<Nota> nn =  NotaCalificativ.getNoteCalificativ();
+       ArrayList<Nota> nn =  NotaCalificativAR.getNoteCalificativ();
        for(Nota n : nn){
            System.out.println(n);
        }

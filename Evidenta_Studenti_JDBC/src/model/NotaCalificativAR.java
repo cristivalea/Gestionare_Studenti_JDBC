@@ -7,10 +7,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class NotaCalificativ extends Nota{
-    private TipCalificativ calificativ;
+public class NotaCalificativAR extends Nota{
 
-    public NotaCalificativ(TipNota tip_nota, String numar_matricol, int cod_disciplina, LocalDate data_examen, int promovat, TipCalificativ calificativ) {
+    private TipCalificativAR calificativ;
+
+    public NotaCalificativAR(TipNota tip_nota, String numar_matricol, int cod_disciplina, LocalDate data_examen, int promovat, TipCalificativAR calificativ) {
         super(tip_nota, numar_matricol, cod_disciplina, data_examen, promovat);
         this.calificativ = calificativ;
     }
@@ -19,28 +20,21 @@ public class NotaCalificativ extends Nota{
         ArrayList<Nota> noteNumerice = new ArrayList<Nota>();
         try{
             Statement st = DBConnection.getInstance().getConnection().createStatement();
-            ResultSet rezultat = st.executeQuery("SELECT * FROM note WHERE Tip_nota='C'");
+            ResultSet rezultat = st.executeQuery("SELECT * FROM note WHERE Tip_nota='A'");
             while (rezultat.next()){
                 String nrMat = rezultat.getString("Numar_matricol_Student");
                 int codDsiciplina = rezultat.getInt("Cod_Disciplina_Nota");
                 Date dataExamen = rezultat.getDate("Data_Examen");
                 LocalDate data_exemen_final = ((java.sql.Date) dataExamen).toLocalDate();
                 String nota_finala =  rezultat.getString("Valoare_Nota");
-                TipCalificativ cal = TipCalificativ.INSUFICIENT;
-                if(nota_finala.equals(TipCalificativ.INSUFICIENT.getDenumire())){
-                    cal = TipCalificativ.INSUFICIENT;
-                } else if (nota_finala.equals(TipCalificativ.SUFICIENT.getDenumire())) {
-                    cal = TipCalificativ.SUFICIENT;
-                } else if (nota_finala.equals(TipCalificativ.BINE.getDenumire())) {
-                    cal = TipCalificativ.BINE;
-                } else if (nota_finala.equals(TipCalificativ.FOARTE_BINE.getDenumire())) {
-                    cal = TipCalificativ.FOARTE_BINE;
-                }
-                else if (nota_finala.equals(TipCalificativ.EXCELENT.getDenumire())){
-                    cal = TipCalificativ.EXCELENT;
+                TipCalificativAR cal = TipCalificativAR.ADMIS;
+                if(nota_finala.equals(TipCalificativAR.RESPINS.getDenumire())){
+                    cal = TipCalificativAR.RESPINS;
+                } else if (nota_finala.equals(TipCalificativAR.ADMIS.getDenumire())) {
+                    cal = TipCalificativAR.ADMIS;
                 }
                 int promovat = rezultat.getInt("Promovat");
-                NotaCalificativ nota = new NotaCalificativ(TipNota.C, nrMat, codDsiciplina, data_exemen_final, promovat, cal);
+                NotaCalificativAR nota = new NotaCalificativAR(TipNota.A, nrMat, codDsiciplina, data_exemen_final, promovat, cal);
                 noteNumerice.add(nota);
             }
         }catch (SQLException sql){
@@ -56,7 +50,7 @@ public class NotaCalificativ extends Nota{
         return false;
     }
 
-    public TipCalificativ getNotaFinala(){
+    public TipCalificativAR getNotaFinala(){
         return calificativ;
     }
     @Override
