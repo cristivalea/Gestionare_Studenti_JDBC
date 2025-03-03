@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class NotaCalificativ extends Nota{
 
-    private  static TipCalificativ calificativ;
+    private  TipCalificativ calificativ;
 
     public NotaCalificativ(TipNota tip_nota, String numar_matricol, int cod_disciplina, LocalDate data_examen, int promovat, TipCalificativ calificativ) {
         super(tip_nota, numar_matricol, cod_disciplina, data_examen, promovat);
@@ -20,7 +20,7 @@ public class NotaCalificativ extends Nota{
         ArrayList<Nota> noteNumerice = new ArrayList<Nota>();
         try{
             Statement st = DBConnection.getInstance().getConnection().createStatement();
-            ResultSet rezultat = st.executeQuery("SELECT * FROM note WHERE Tip_nota='C'");
+            ResultSet rezultat = st.executeQuery("SELECT * FROM note WHERE Tip_nota='A'");
             while (rezultat.next()){
                 String nrMat = rezultat.getString("Numar_matricol_Student");
                 int codDsiciplina = rezultat.getInt("Cod_Disciplina_Nota");
@@ -30,10 +30,11 @@ public class NotaCalificativ extends Nota{
                 TipCalificativ cal = TipCalificativ.ADMIS;
                 if(nota_finala.equals(TipCalificativ.RESPINS.getDenumire())){
                     cal = TipCalificativ.RESPINS;
+                } else if (nota_finala.equals(TipCalificativ.ADMIS.getDenumire())) {
+                    cal = TipCalificativ.ADMIS;
                 }
-                calificativ = cal;
                 int promovat = rezultat.getInt("Promovat");
-                NotaCalificativ nota = new NotaCalificativ(TipNota.C, nrMat, codDsiciplina, data_exemen_final, promovat, cal);
+                NotaCalificativ nota = new NotaCalificativ(TipNota.A, nrMat, codDsiciplina, data_exemen_final, promovat, cal);
                 noteNumerice.add(nota);
             }
         }catch (SQLException sql){
