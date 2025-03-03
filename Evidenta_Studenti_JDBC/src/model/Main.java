@@ -3,6 +3,7 @@ package model;
 import model.Disciplina;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Main {
     public static void main2(String[] args){
@@ -15,7 +16,7 @@ public class Main {
         Student.dataNastere(LocalDate.of(2002, 10, 02), "CTI022105");
     }
 
-    public static void main(String[] args){
+    public static void main3(String[] args){
         Disciplina disc1 = new Disciplina(501, "Logica2", 0.5, 0.5, 0,0,0,0,0,0, 5);
         //disc1.adaugaDisciplina();
         Disciplina.stergereDisciplina(500);
@@ -31,5 +32,12 @@ public class Main {
         for (Disciplina d : Disciplina.getDiscipline()){
             System.out.println(d);
         }
+    }
+
+    public static void main(String[] args){
+       ArrayList<Nota> nn =  NotaNumerica.getNote();
+       for(Nota n : nn){
+           System.out.println(n);
+       }
     }
 }

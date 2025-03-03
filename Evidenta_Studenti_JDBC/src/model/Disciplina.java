@@ -190,4 +190,48 @@ public class Disciplina {
             DBConnection.logger.info(sql.getSQLState());
         }
     }// end modificare numar credite
+
+    public int getCodDisciplina() {
+        return codDisciplina;
+    }
+
+    public String getNumedisciplina() {
+        return numedisciplina;
+    }
+
+    public double getCoefCurs() {
+        return coefCurs;
+    }
+
+    public double getCoefLab() {
+        return coefLab;
+    }
+
+    public double getCoefProiect() {
+        return coefProiect;
+    }
+
+    public double getCoefSeminar() {
+        return coefSeminar;
+    }
+
+    public double getCoefPrezentaCurs() {
+        return coefPrezentaCurs;
+    }
+
+    public double getCoefPrezentaLab() {
+        return coefPrezentaLab;
+    }
+
+    public double getCoefPrezentaProiect() {
+        return coefPrezentaProiect;
+    }
+
+    public double getCoefPrezentaSeminar() {
+        return coefPrezentaSeminar;
+    }
+
+    public int getNumarCredite() {
+        return numarCredite;
+    }
 }
