@@ -1,5 +1,7 @@
+package model;
+
 public enum TipNota {
-    N("Nota numerica"),
+    N("model.Nota numerica"),
     C("Calificativ"),
     A("Admis / Respins");
 

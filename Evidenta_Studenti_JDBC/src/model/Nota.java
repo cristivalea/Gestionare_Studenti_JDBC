@@ -1,3 +1,7 @@
+package model;
+
+import model.TipNota;
+
 import java.time.LocalDate;
 
 public class Nota {
@@ -19,7 +23,7 @@ public class Nota {
 
     @Override
     public String toString() {
-        return "Nota{" +
+        return "model.Nota{" +
                 "tip_nota=" + tip_nota +
                 ", numar_matricol='" + numar_matricol + '\'' +
                 ", cod_disciplina=" + cod_disciplina +

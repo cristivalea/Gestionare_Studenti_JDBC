@@ -1,3 +1,7 @@
+package model;
+
+import model.Disciplina;
+
 import java.time.LocalDate;
 
 public class Main {

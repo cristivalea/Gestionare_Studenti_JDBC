@@ -1,3 +1,5 @@
+package model;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -29,7 +31,7 @@ public class Student {
             ResultSet rezultat = st.executeQuery("SELECT * FROM `studenti`");
              while (rezultat.next()){
                  String nrMat = rezultat.getString("Numar_Matricol");
-                 //DBConnection.logger.info(nrMat);
+                 //model.DBConnection.logger.info(nrMat);
                  String numeFam = rezultat.getString("Nume_Familie");
                  String[] prenume = rezultat.getString("Prenume").split(" ");
                  Date sqlDate = rezultat.getDate("Data_Nastere");
@@ -47,7 +49,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "model.Student{" +
                 "nrMatricol='" + nrMatricol + '\'' +
                 ", numeFamilie='" + numeFamilie + '\'' +
                 ", prenume=" + Arrays.toString(prenume) +

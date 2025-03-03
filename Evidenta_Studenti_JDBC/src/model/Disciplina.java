@@ -1,4 +1,5 @@
-import java.lang.reflect.Array;
+package model;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -60,7 +61,7 @@ public class Disciplina {
 
     @Override
     public String toString() {
-        return "Disciplina{" +
+        return "model.Disciplina{" +
                 "codDisciplina=" + codDisciplina +
                 ", numedisciplina='" + numedisciplina + '\'' +
                 ", coefCurs=" + coefCurs +
