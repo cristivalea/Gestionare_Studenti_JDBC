@@ -22,7 +22,6 @@ public abstract class Nota {
 
     public abstract boolean isPromovat();
 
-    public abstract int getNotaFinala();
 
     @Override
     public String toString() {
