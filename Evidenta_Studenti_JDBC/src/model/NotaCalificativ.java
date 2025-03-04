@@ -25,20 +25,19 @@ public class NotaCalificativ extends Nota{
                 int codDsiciplina = rezultat.getInt("Cod_Disciplina_Nota");
                 Date dataExamen = rezultat.getDate("Data_Examen");
                 LocalDate data_exemen_final = ((java.sql.Date) dataExamen).toLocalDate();
-                String nota_finala =  rezultat.getString("Valoare_Nota");
+                String nota_finala = rezultat.getString("Valoare_Nota");
                 TipCalificativ cal = TipCalificativ.INSUFICIENT;
-                if(nota_finala.equals(TipCalificativ.INSUFICIENT.getDenumire())){
-                    cal = TipCalificativ.INSUFICIENT;
-                } else if (nota_finala.equals(TipCalificativ.SUFICIENT.getDenumire())) {
-                    cal = TipCalificativ.SUFICIENT;
-                } else if (nota_finala.equals(TipCalificativ.BINE.getDenumire())) {
-                    cal = TipCalificativ.BINE;
-                } else if (nota_finala.equals(TipCalificativ.FOARTE_BINE.getDenumire())) {
-                    cal = TipCalificativ.FOARTE_BINE;
+                if (nota_finala != null) {
+                    nota_finala = nota_finala.trim();  // Elimină spațiile nedorite
+
+                    for (TipCalificativ tip : TipCalificativ.values()) {
+                        if (nota_finala.equalsIgnoreCase(tip.getDenumire())) {
+                            cal = tip;
+                            break;
+                        }
+                    }
                 }
-                else if (nota_finala.equals(TipCalificativ.EXCELENT.getDenumire())){
-                    cal = TipCalificativ.EXCELENT;
-                }
+
                 int promovat = rezultat.getInt("Promovat");
                 NotaCalificativ nota = new NotaCalificativ(TipNota.C, nrMat, codDsiciplina, data_exemen_final, promovat, cal);
                 noteNumerice.add(nota);

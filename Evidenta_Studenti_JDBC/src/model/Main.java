@@ -33,7 +33,7 @@ public class Main {
     }
 
     public static void main(String[] args){
-       ArrayList<Nota> nn =  NotaCalificativAR.getNoteCalificativ();
+       ArrayList<Nota> nn =  NotaCalificativ.getNoteCalificativ();
        for(Nota n : nn){
            System.out.println(n);
        }
