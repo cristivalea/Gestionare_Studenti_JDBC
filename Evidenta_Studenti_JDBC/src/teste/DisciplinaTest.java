@@ -12,10 +12,118 @@ public class DisciplinaTest {
 
    @BeforeEach
     public void initTest(){
+       Disciplina.stergereDisciplina(999);
        disciplina = new Disciplina(999, "Disciplina test", 0.5, 0.4, 0.1, 0, 0.2, 0.3, 0.3, 0.2, 5);
        disciplina.adaugaDisciplina();
    }
 
+   @Test
+   public void codDisciplinTest(){
+       ArrayList<Disciplina> discipline = Disciplina.getDiscipline();
+       boolean verificare = false;
+       for(Disciplina d : discipline){
+           if(d.getCodDisciplina() == 999){
+               if(d.getCoefCurs() >= 0 && d.getCoefCurs() <= 1){
+                   verificare = true;
+                   break;
+               }
+           }
+       }
+       assertTrue(verificare, "Coeficeintul nu indeplineste comditia sa fie >= 0 si <= 1");
+   }// end test cod Disciplina
+
+   @Test
+   public void numeDisciplinaTest() {
+       ArrayList<Disciplina> discipline = Disciplina.getDiscipline();
+       boolean verificare = false;
+       for(Disciplina d : discipline){
+           if(d.getCodDisciplina() == 999){
+               if(d.getNumedisciplina() != null){
+                   verificare = true;
+                   break;
+               }
+           }
+       }
+       assertTrue(verificare, "Numele disciplinei este null");
+   } // end test numeDisciplina;
+
+    @Test
+    public void testCoefCurs(){
+       ArrayList<Disciplina> discipline = Disciplina.getDiscipline();
+       boolean c1 = false;
+       boolean c2 = false;
+       boolean c3 = false;
+       boolean c4 = false;
+       boolean c5 = false;
+       for(Disciplina d : discipline){
+           if(d.getCodDisciplina() == 999){
+               if(d.getCoefCurs() >= 0 && d.getCoefCurs() <= 1){
+                   c1 = true;
+               }
+               if(d.getCoefLab() >= 0 && d.getCoefLab() <= 1){
+                   c2 = true;
+               }
+               if(d.getCoefProiect() >= 0 && d.getCoefProiect() <= 1){
+                   c3 = true;
+               }
+               if(d.getCoefSeminar() >= 0 && d.getCoefSeminar() <= 1){
+                   c4 = true;
+               }
+               if((d.getCoefCurs() + d.getCoefLab() + d.getCoefProiect() + d.getCoefSeminar()) == 1){
+                   c5 = true;
+               }
+           }
+       }
+       assertTrue(c1, "Coeficient curs incorect");
+       assertTrue(c2, "Coeficieent Laborator incorect");
+       assertTrue(c3, "Coeficeint Proiect incorect");
+       assertTrue(c4, "Coeficient Seminar incorect");
+       assertTrue(c5, "Suma coeficientulor nu depaseste 1");
+    } // end testare coeficienti
+
+    @Test
+    public void numarCrediteTest(){
+       ArrayList<Disciplina> discipline = Disciplina.getDiscipline();
+       boolean verificare = false;
+       for(Disciplina d : discipline){
+           if(d.getCodDisciplina() == 999){
+               if(d.getNumarCredite() > 0 && d.getNumarCredite() <= 10){
+                   verificare = true;
+                   break;
+               }
+           }
+       }
+       assertTrue(verificare, "Numarul de credite este in exteriorul intervalui [1, 10]");
+    } // end test numar credite
+
+    @Test
+    public void coeficientiPrezentaTest(){
+        ArrayList<Disciplina> discipline = Disciplina.getDiscipline();
+        boolean c1 = false;
+        boolean c2 = false;
+        boolean c3 = false;
+        boolean c4 = false;
+        for(Disciplina d : discipline){
+            if(d.getCodDisciplina() == 999){
+                if(d.getCoefPrezentaCurs() >= 0 && d.getCoefPrezentaCurs() <= 1){
+                    c1 = true;
+                }
+                if(d.getCoefPrezentaLab() >= 0 && d.getCoefPrezentaLab() <= 1){
+                    c2 = true;
+                }
+                if(d.getCoefPrezentaProiect() >= 0 && d.getCoefPrezentaProiect() <= 1){
+                    c3 = true;
+                }
+                if(d.getCoefPrezentaSeminar() >= 0 && d.getCoefPrezentaSeminar() <= 1){
+                    c4 = true;
+                }
+            }
+        }
+        assertTrue(c1, "Coeficient prezenta curs incorect");
+        assertTrue(c2, "Coeficieent prezenta Laborator incorect");
+        assertTrue(c3, "Coeficeint prezenta Proiect incorect");
+        assertTrue(c4, "Coeficient prezenta Seminar incorect");
+    } // end test coef prezenta
    @Test
     public void getDisciplineTest(){
        ArrayList<Disciplina> discipline = Disciplina.getDiscipline();

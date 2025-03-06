@@ -1,5 +1,8 @@
 package model;
 
+import exceptii.FormatException;
+import exceptii.StudentNeadecvat;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,6 +18,7 @@ public class Student {
     private LocalDate dataInmatriculare;
     private int varsta;
     private String cale_poza;
+    private ArrayList<Nota> note = new ArrayList<Nota>();
 
     public Student(String nrMatricol, String numeFamilie, String[] prenume, LocalDate dataNAstere, LocalDate dataInmatriculare) {
         this.nrMatricol = nrMatricol;
@@ -103,6 +107,41 @@ public class Student {
             DBConnection.logger.info(sql.getSQLState());
         }
     }// end update data nastere
+
+    public String getNrMatricol() {
+        return nrMatricol;
+    }
+
+    public String getNumeFamilie() {
+        return numeFamilie;
+    }
+
+    public String[] getPrenume() {
+        return prenume;
+    }
+
+    public LocalDate getDataNAstere() {
+        return dataNAstere;
+    }
+
+    public LocalDate getDataInmatriculare() {
+        return dataInmatriculare;
+    }
+
+    public int getVarsta() {
+        return varsta;
+    }
+
+    public String getCale_poza() {
+        return cale_poza;
+    }
+
+    public void setCale_poza(String cale_poza) {
+        this.cale_poza = cale_poza;
+    }
+
+
+
 }
 
 

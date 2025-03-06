@@ -25,15 +25,38 @@ public class Disciplina {
         if(numedisciplina != null) {
             this.numedisciplina = numedisciplina;
         }
-        this.coefCurs = coefCurs;
-        this.coefLab = coefLab;
-        this.coefProiect = coefProiect;
-        this.coefSeminar = coefSeminar;
-        this.coefPrezentaCurs = coefPrezentaCurs;
-        this.coefPrezentaLab = coefPrezentaLab;
-        this.coefPrezentaProiect = coefPrezentaProiect;
-        this.coefPrezentaSeminar = coefPrezentaSeminar;
-        this.numarCredite = numarCredite;
+        boolean c1 = coefCurs >= 0 && coefCurs <= 1;
+        boolean c2 = coefLab >= 0 && coefLab <= 1;
+        boolean c3 = coefProiect >= 0 && coefProiect <= 1;
+        boolean c4 = coefSeminar >= 0 && coefSeminar <= 1;
+        boolean c5 = (coefCurs + coefLab + coefProiect + coefSeminar) == 1;
+        if(c1 && c5) {
+            this.coefCurs = coefCurs;
+        }
+        if(c2 && c5) {
+            this.coefLab = coefLab;
+        }
+        if(c3 && c5) {
+            this.coefProiect = coefProiect;
+        }
+        if(c4 && c5) {
+            this.coefSeminar = coefSeminar;
+        }
+        if(coefPrezentaCurs >= 0 && coefPrezentaCurs <=1) {
+            this.coefPrezentaCurs = coefPrezentaCurs;
+        }
+        if(coefPrezentaLab >= 0 && coefPrezentaLab <= 1) {
+            this.coefPrezentaLab = coefPrezentaLab;
+        }
+        if(coefPrezentaProiect >= 0 && coefProiect <= 1) {
+            this.coefPrezentaProiect = coefPrezentaProiect;
+        }
+        if(coefPrezentaSeminar >= 0 && coefPrezentaSeminar <= 1) {
+            this.coefPrezentaSeminar = coefPrezentaSeminar;
+        }
+        if(numarCredite > 0 && numarCredite <= 10) {
+            this.numarCredite = numarCredite;
+        }
     }
 
     public static ArrayList<Disciplina> getDiscipline(){
@@ -65,9 +88,9 @@ public class Disciplina {
 
     @Override
     public String toString() {
-        return "model.Disciplina{" +
-                "codDisciplina=" + codDisciplina +
-                ", numedisciplina='" + numedisciplina + '\'' +
+        return "Disciplina{" +
+                ((this.codDisciplina > 0) ? "codDisciplina=" + codDisciplina : "")
+                + ((this.numedisciplina != null) ? ", numedisciplina='" + numedisciplina + '\'': "") +
                 ", coefCurs=" + coefCurs +
                 ", coefLab=" + coefLab +
                 ", coefProiect=" + coefProiect +
