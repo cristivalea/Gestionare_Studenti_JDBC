@@ -19,8 +19,12 @@ public class Disciplina {
     int numarCredite;
 
     public Disciplina(int codDisciplina, String numedisciplina, double coefCurs, double coefLab, double coefProiect, double coefSeminar, double coefPrezentaCurs, double coefPrezentaLab, double coefPrezentaProiect, double coefPrezentaSeminar, int numarCredite) {
-        this.codDisciplina = codDisciplina;
-        this.numedisciplina = numedisciplina;
+        if(codDisciplina >= 100 || codDisciplina < 1000) {
+            this.codDisciplina = codDisciplina;
+        }
+        if(numedisciplina != null) {
+            this.numedisciplina = numedisciplina;
+        }
         this.coefCurs = coefCurs;
         this.coefLab = coefLab;
         this.coefProiect = coefProiect;
