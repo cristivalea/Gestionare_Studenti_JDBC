@@ -69,4 +69,10 @@ public class NotaCalificativ extends Nota{
                 ", promovat=" + promovat +
                 '}';
     }
+
+    @Override
+    public void adaugaNota() {
+
+    }
+
 }

@@ -32,10 +32,18 @@ public class Main {
         }
     }
 
-    public static void main(String[] args){
+    public static void main4(String[] args){
        ArrayList<Nota> nn =  NotaCalificativ.getNoteCalificativ();
        for(Nota n : nn){
            System.out.println(n);
        }
+    }
+
+    public static void main(String[] args){
+        NotaNumerica nn = new NotaNumerica(TipNota.N, "CTI024873", 999, LocalDate.of(2025, 01, 10), 9, 1);
+        System.out.println(nn);
+        nn.adaugaNota();
+        NotaNumerica.stergeNota("CTI024873", 999);
+        NotaNumerica.updateNota(7, 100, "CTI024873");
     }
 }

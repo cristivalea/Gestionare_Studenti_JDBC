@@ -1,5 +1,8 @@
 package model;
 
+
+import com.sun.java.swing.plaf.windows.WindowsTabbedPaneUI;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -7,11 +10,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
+
 public class NotaNumerica extends Nota{
 
     private int notaFinala;
 
-    public NotaNumerica(TipNota tip_nota, String numar_matricol, int cod_disciplina, LocalDate data_examen, int promovat, int notaFinala) {
+    public NotaNumerica(TipNota tip_nota, String numar_matricol, int cod_disciplina, LocalDate data_examen, int notaFinala, int promovat) {
         super(tip_nota, numar_matricol, cod_disciplina, data_examen, promovat);
         this.notaFinala = notaFinala;
     }
@@ -28,7 +32,7 @@ public class NotaNumerica extends Nota{
                 LocalDate data_exemen_final = ((java.sql.Date) dataExamen).toLocalDate();
                 int notaFinala = rezultat.getInt("Valoare_Nota");
                 int promovat = rezultat.getInt("Promovat");
-                NotaNumerica nota = new NotaNumerica(TipNota.N, nrMat, codDsiciplina, data_exemen_final, promovat, notaFinala);
+                NotaNumerica nota = new NotaNumerica(TipNota.N, nrMat, codDsiciplina, data_exemen_final, notaFinala, promovat);
                 noteNumerice.add(nota);
             }
         }catch (SQLException sql){
@@ -59,9 +63,37 @@ public class NotaNumerica extends Nota{
                 ", data_examen=" + data_examen +
                 ", promovat=" + promovat +
                 '}';
-    } // end toString
-
-    public void setNotaFinala(int notaFinala) {
-        this.notaFinala = notaFinala;
     }
+
+    public void adaugaNota(){
+        String str = "INSERT INTO note (Tip_nota, Numar_Matricol_Student, Cod_Disciplina_Nota, Data_Examen, Valoare_Nota, Promovat)"
+        + "VALUES ('" + TipNota.N + "','"  + this.numar_matricol + "'," + this.cod_disciplina + ",'" + this.data_examen + "'," + this.notaFinala + "," + this.promovat + ")";
+
+        try{
+            Statement st = DBConnection.getInstance().getConnection().createStatement();
+            st.execute(str);
+        }catch (SQLException sql){
+            DBConnection.logger.info(sql.getSQLState());
+        }
+    } // end adaugare nota numerica
+
+    public static void stergeNota(String codMatricol, int codDisciplina){
+        String str = "DELETE FROM note WHERE Cod_Disciplina_Nota=" + codDisciplina + " AND Numar_Matricol_Student='" + codMatricol + "'";
+        try{
+            Statement st = DBConnection.getInstance().getConnection().createStatement();
+            st.execute(str);
+        }catch (SQLException sql){
+            DBConnection.logger.info(sql.getSQLState());
+        }
+    }// end stergere nota
+
+    public static void updateNota(int notaNoua, int codDisciplina,String codStudent){
+        String str = "UPDATE note SET Valoare_Nota=" + notaNoua + " WHERE Numar_Matricol_Student='" + codStudent + "' AND Cod_Disciplina_Nota=" + codDisciplina;
+        try{
+            Statement st = DBConnection.getInstance().getConnection().createStatement();
+            st.execute(str);
+        }catch (SQLException sql){
+            DBConnection.logger.info(sql.getSQLState());
+        }
+    } // end update nota
 }

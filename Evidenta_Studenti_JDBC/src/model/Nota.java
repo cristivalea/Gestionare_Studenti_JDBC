@@ -21,7 +21,7 @@ public abstract class Nota {
     }
 
     public abstract boolean isPromovat();
-
+    public abstract void adaugaNota();
 
     @Override
     public String toString() {
@@ -32,5 +32,9 @@ public abstract class Nota {
                 ", data_examen=" + data_examen +
                 ", promovat=" + promovat +
                 '}';
+    }
+
+    public String getNumar_matricol() {
+        return numar_matricol;
     }
 }
