@@ -68,7 +68,6 @@ public class NotaNumerica extends Nota{
     public void adaugaNota(){
         String str = "INSERT INTO note (Tip_nota, Numar_Matricol_Student, Cod_Disciplina_Nota, Data_Examen, Valoare_Nota, Promovat)"
         + "VALUES ('" + TipNota.N + "','"  + this.numar_matricol + "'," + this.cod_disciplina + ",'" + this.data_examen + "'," + this.notaFinala + "," + this.promovat + ")";
-
         try{
             Statement st = DBConnection.getInstance().getConnection().createStatement();
             st.execute(str);

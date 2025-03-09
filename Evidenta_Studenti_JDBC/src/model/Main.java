@@ -1,5 +1,7 @@
 package model;
 
+import org.apache.poi.ss.formula.functions.T;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -12,7 +14,7 @@ public class Main {
         Student.stergereStudent("CTI023431");
         Student.updateNumefamilie("Popescu", "CTI022106");
         Student.dataNastere(LocalDate.of(2002, 10, 02), "CTI022105");
-    }
+    } // testare functionalitati studenti
 
     public static void main3(String[] args){
         Disciplina disc1 = new Disciplina(501, "Logica2", 0.5, 0.5, 0,0,0,0,0,0, 5);
@@ -30,20 +32,27 @@ public class Main {
         for (Disciplina d : Disciplina.getDiscipline()){
             System.out.println(d);
         }
-    }
+    } // testare functionalitati disciplina
 
     public static void main4(String[] args){
        ArrayList<Nota> nn =  NotaCalificativ.getNoteCalificativ();
        for(Nota n : nn){
            System.out.println(n);
        }
-    }
+    } // testare incarcare note calificativ
 
-    public static void main(String[] args){
+    public static void main5(String[] args){
         NotaNumerica nn = new NotaNumerica(TipNota.N, "CTI024873", 999, LocalDate.of(2025, 01, 10), 9, 1);
         System.out.println(nn);
         nn.adaugaNota();
         NotaNumerica.stergeNota("CTI024873", 999);
         NotaNumerica.updateNota(7, 100, "CTI024873");
+    } // testare nota numerica
+
+    public static void main(String[] args){
+        NotaCalificativ nc = new NotaCalificativ(TipNota.C, "CTI024873", 999, LocalDate.of(2024, 12, 18), TipCalificativ.BINE, 1);
+        //nc.adaugaNota();
+        //NotaCalificativ.stergereNota(999, "CTI024873");
+        NotaCalificativ.updateNota(TipCalificativ.BINE, 105, "CTI024873");
     }
 }
