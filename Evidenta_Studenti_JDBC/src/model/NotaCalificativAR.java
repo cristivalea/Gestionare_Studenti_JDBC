@@ -11,7 +11,7 @@ public class NotaCalificativAR extends Nota{
 
     private TipCalificativAR calificativ;
 
-    public NotaCalificativAR(TipNota tip_nota, String numar_matricol, int cod_disciplina, LocalDate data_examen, int promovat, TipCalificativAR calificativ) {
+    public NotaCalificativAR(TipNota tip_nota, String numar_matricol, int cod_disciplina, LocalDate data_examen, TipCalificativAR calificativ, int promovat) {
         super(tip_nota, numar_matricol, cod_disciplina, data_examen, promovat);
         this.calificativ = calificativ;
     }
@@ -34,7 +34,7 @@ public class NotaCalificativAR extends Nota{
                     cal = TipCalificativAR.ADMIS;
                 }
                 int promovat = rezultat.getInt("Promovat");
-                NotaCalificativAR nota = new NotaCalificativAR(TipNota.A, nrMat, codDsiciplina, data_exemen_final, promovat, cal);
+                NotaCalificativAR nota = new NotaCalificativAR(TipNota.A, nrMat, codDsiciplina, data_exemen_final, cal, promovat);
                 noteNumerice.add(nota);
             }
         }catch (SQLException sql){
@@ -65,8 +65,34 @@ public class NotaCalificativAR extends Nota{
                 '}';
     }
 
-    @Override
     public void adaugaNota() {
+        String str = "INSERT INTO note (Tip_nota, Numar_Matricol_Student, Cod_Disciplina_Nota, Data_Examen, Valoare_Nota, Promovat)"
+                + "VALUES ('" + TipNota.A + "','"  + this.numar_matricol + "'," + this.cod_disciplina + ",'" + this.data_examen + "','" + this.calificativ + "'," + this.promovat + ")";
+        try{
+            Statement st = DBConnection.getInstance().getConnection().createStatement();
+            st.execute(str);
+        }catch (SQLException sql){
+            DBConnection.logger.info(sql.getSQLState());
+        }
+    } // end adaugare nota calificativ
 
-    }
+    public static void stergereNota(int codDisciplina, String nrMatricol){
+        String str = "DELETE FROM note WHERE Cod_Disciplina_Nota=" + codDisciplina + " AND Numar_Matricol_Student='" + nrMatricol + "'";
+        try{
+            Statement st = DBConnection.getInstance().getConnection().createStatement();
+            st.execute(str);
+        }catch (SQLException sql){
+            DBConnection.logger.info(sql.getSQLState());
+        }
+    } // end stergere nota calificativ
+
+    public static void updateNota(TipCalificativAR tc, int codDisciplina,String codStudent){
+        String str = "UPDATE note SET Valoare_Nota='" + tc + "' WHERE Numar_Matricol_Student='" + codStudent + "' AND Cod_Disciplina_Nota=" + codDisciplina;
+        try{
+            Statement st = DBConnection.getInstance().getConnection().createStatement();
+            st.execute(str);
+        }catch (SQLException sql){
+            DBConnection.logger.info(sql.getSQLState());
+        }
+    } // end update nota calificativ
 }

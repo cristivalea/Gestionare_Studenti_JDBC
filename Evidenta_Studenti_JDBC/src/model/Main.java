@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Main {
-    public static void main2(String[] args){
+    public static void main2(String[] args) {
         Student.getStudenti();
         String[] prenume = new String[]{"Ionut", "Mihai"};
         Student s1 = new Student("CTI023431", "Paulescu", prenume, LocalDate.of(1992, 10, 11), LocalDate.of(2024, 07, 21));
@@ -16,8 +16,8 @@ public class Main {
         Student.dataNastere(LocalDate.of(2002, 10, 02), "CTI022105");
     } // testare functionalitati studenti
 
-    public static void main3(String[] args){
-        Disciplina disc1 = new Disciplina(501, "Logica2", 0.5, 0.5, 0,0,0,0,0,0, 5);
+    public static void main3(String[] args) {
+        Disciplina disc1 = new Disciplina(501, "Logica2", 0.5, 0.5, 0, 0, 0, 0, 0, 0, 5);
         //disc1.adaugaDisciplina();
         Disciplina.stergereDisciplina(500);
         Disciplina.modificareCoeficientCurs(0.5, 100);
@@ -29,19 +29,19 @@ public class Main {
         Disciplina.modificareCoeficientPrezentaProiect(0.5, 100);
         Disciplina.modificareCoeficientPrezentaSeminar(0.6, 100);
         Disciplina.modificareNrCredite(6, 100);
-        for (Disciplina d : Disciplina.getDiscipline()){
+        for (Disciplina d : Disciplina.getDiscipline()) {
             System.out.println(d);
         }
     } // testare functionalitati disciplina
 
-    public static void main4(String[] args){
-       ArrayList<Nota> nn =  NotaCalificativ.getNoteCalificativ();
-       for(Nota n : nn){
-           System.out.println(n);
-       }
+    public static void main4(String[] args) {
+        ArrayList<Nota> nn = NotaCalificativ.getNoteCalificativ();
+        for (Nota n : nn) {
+            System.out.println(n);
+        }
     } // testare incarcare note calificativ
 
-    public static void main5(String[] args){
+    public static void main5(String[] args) {
         NotaNumerica nn = new NotaNumerica(TipNota.N, "CTI024873", 999, LocalDate.of(2025, 01, 10), 9, 1);
         System.out.println(nn);
         nn.adaugaNota();
@@ -49,10 +49,17 @@ public class Main {
         NotaNumerica.updateNota(7, 100, "CTI024873");
     } // testare nota numerica
 
-    public static void main(String[] args){
+    public static void main6(String[] args) {
         NotaCalificativ nc = new NotaCalificativ(TipNota.C, "CTI024873", 999, LocalDate.of(2024, 12, 18), TipCalificativ.BINE, 1);
         //nc.adaugaNota();
         //NotaCalificativ.stergereNota(999, "CTI024873");
         NotaCalificativ.updateNota(TipCalificativ.BINE, 105, "CTI024873");
+    } // testare nota calificativ
+
+    public static void main(String[] args) {
+        NotaCalificativAR na = new NotaCalificativAR(TipNota.A, "CTI024873", 999, LocalDate.of(2024, 12, 18), TipCalificativAR.ADMIS, 1);
+        //na.adaugaNota();
+        //NotaCalificativ.stergereNota(999, "CTI024873");
+        NotaCalificativAR.updateNota(TipCalificativAR.RESPINS, 107, "CTI024873");
     }
 }
