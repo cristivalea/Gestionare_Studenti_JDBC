@@ -44,9 +44,9 @@ public class Main {
     public static void main5(String[] args) {
         NotaNumerica nn = new NotaNumerica(TipNota.N, "CTI024873", 999, LocalDate.of(2025, 01, 10), 9, 1);
         System.out.println(nn);
-        nn.adaugaNota();
-        NotaNumerica.stergeNota("CTI024873", 999);
-        NotaNumerica.updateNota(7, 100, "CTI024873");
+        //nn.adaugaNota();
+        //NotaNumerica.stergeNota("CTI024873", 999);
+        NotaNumerica.updateNota(3, 100, "CTI024873");
     } // testare nota numerica
 
     public static void main6(String[] args) {
@@ -56,7 +56,7 @@ public class Main {
         NotaCalificativ.updateNota(TipCalificativ.BINE, 105, "CTI024873");
     } // testare nota calificativ
 
-    public static void main(String[] args) {
+    public static void main7(String[] args) {
         NotaCalificativAR na = new NotaCalificativAR(TipNota.A, "CTI024873", 999, LocalDate.of(2024, 12, 18), TipCalificativAR.ADMIS, 1);
         //na.adaugaNota();
         //NotaCalificativ.stergereNota(999, "CTI024873");

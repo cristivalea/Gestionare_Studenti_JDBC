@@ -18,11 +18,13 @@ public class NotaNumericaTest {
 
     @BeforeEach
     public void initTest(){
-        nota_numerica = new NotaNumerica(TipNota.N, "CTI024873", 100, LocalDate.of(2025, 01, 10), 1, 9);
+        NotaNumerica.stergeNota("CTI024873", 999);
+        nota_numerica = new NotaNumerica(TipNota.N, "CTI024873", 999, LocalDate.of(2025, 01, 10), 9, 1);
+        nota_numerica.adaugaNota();
     }
 
     @Test
-    void notaFinalaTest(){
+    public void notaFinalaTest(){
         ArrayList<Nota> note = NotaNumerica.getNote();
         for(Nota n : note){
             if(n.getNumar_matricol() == "CTI024873"){
@@ -30,4 +32,21 @@ public class NotaNumericaTest {
             }
         }
     }
+
+    @Test
+    public void isPromovatTest(){
+        ArrayList<Nota> n = NotaNumerica.getNote();
+        for(Nota nota : n){
+                assertEquals(1, nota.getPromovat());
+        }
+    }// end test isPromovat
+
+    @Test
+    public void updateTest(){
+        ArrayList<Nota> n = NotaNumerica.getNote();
+        NotaNumerica.updateNota(4, 999, "CTI024873");
+        for(Nota nota : n){
+            assertEquals(0, nota.getPromovat());
+        }
+    }// end update test
 }

@@ -37,4 +37,20 @@ public abstract class Nota {
     public String getNumar_matricol() {
         return numar_matricol;
     }
+
+    public TipNota getTip_nota() {
+        return tip_nota;
+    }
+
+    public int getCod_disciplina() {
+        return cod_disciplina;
+    }
+
+    public LocalDate getData_examen() {
+        return data_examen;
+    }
+
+    public int getPromovat() {
+        return promovat;
+    }
 }

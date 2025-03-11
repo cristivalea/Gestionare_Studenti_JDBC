@@ -87,7 +87,11 @@ public class NotaNumerica extends Nota{
     }// end stergere nota
 
     public static void updateNota(int notaNoua, int codDisciplina,String codStudent){
-        String str = "UPDATE note SET Valoare_Nota=" + notaNoua + " WHERE Numar_Matricol_Student='" + codStudent + "' AND Cod_Disciplina_Nota=" + codDisciplina;
+        int promovat = 0;
+        if(notaNoua > 5){
+            promovat = 1;
+        }
+        String str = "UPDATE note SET Valoare_Nota=" + notaNoua + ", Promovat=" + promovat + " WHERE Numar_Matricol_Student='" + codStudent + "' AND Cod_Disciplina_Nota=" + codDisciplina;
         try{
             Statement st = DBConnection.getInstance().getConnection().createStatement();
             st.execute(str);
