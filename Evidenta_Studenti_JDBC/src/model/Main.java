@@ -61,5 +61,5 @@ public class Main {
         //na.adaugaNota();
         //NotaCalificativ.stergereNota(999, "CTI024873");
         NotaCalificativAR.updateNota(TipCalificativAR.RESPINS, 107, "CTI024873");
-    }
+    } // end main nota califictiv a/r
 }

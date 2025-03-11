@@ -87,7 +87,11 @@ public class NotaCalificativAR extends Nota{
     } // end stergere nota calificativ
 
     public static void updateNota(TipCalificativAR tc, int codDisciplina,String codStudent){
-        String str = "UPDATE note SET Valoare_Nota='" + tc + "' WHERE Numar_Matricol_Student='" + codStudent + "' AND Cod_Disciplina_Nota=" + codDisciplina;
+        int promovat = 0;
+        if(tc.getDenumire().equals(TipCalificativAR.ADMIS)){
+            promovat = 1;
+        }
+        String str = "UPDATE note SET Valoare_Nota='" + tc + "', Promovat= " + promovat + " WHERE Numar_Matricol_Student='" + codStudent + "' AND Cod_Disciplina_Nota=" + codDisciplina;
         try{
             Statement st = DBConnection.getInstance().getConnection().createStatement();
             st.execute(str);
@@ -95,4 +99,8 @@ public class NotaCalificativAR extends Nota{
             DBConnection.logger.info(sql.getSQLState());
         }
     } // end update nota calificativ
+
+    public TipCalificativAR getCalificativ() {
+        return calificativ;
+    }
 }
