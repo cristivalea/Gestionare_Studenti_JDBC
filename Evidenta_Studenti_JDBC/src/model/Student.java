@@ -31,20 +31,20 @@ public class Student {
             throw fnm;
         }
         for(String nr : listaNrMatricole){
-            if(nrMatricol == nr){
+            if(nrMatricol.equals(nr)){
                 StudentNeadecvat stn = new StudentNeadecvat(StudentNeadecvat.UNICITATE,nrMatricol);
                 throw stn;
             }
         }
         this.nrMatricol = nrMatricol;
         listaNrMatricole.add(this.nrMatricol);
-        if(RegularExpresion.RegularExpresionNumePrenume(numeFamilie)){
+        if(!RegularExpresion.RegularExpresionNumePrenume(numeFamilie)){
             FormatException fnf = new FormatException(numeFamilie,FormatException.NUME_PRENUME_FORMAT);
             throw fnf;
         }
         this.numeFamilie = numeFamilie;
         for(int i = 0; i < prenume.length; i++){
-            if(RegularExpresion.RegularExpresionNumePrenume(prenume[i])){
+            if(!RegularExpresion.RegularExpresionNumePrenume(prenume[i])){
                 FormatException fnf = new FormatException(prenume[i],FormatException.NUME_PRENUME_FORMAT);
                 throw fnf;
             }

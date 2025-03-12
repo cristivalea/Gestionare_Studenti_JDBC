@@ -6,14 +6,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Main {
-    public static void main2(String[] args) throws Exception{
+    public static void main1(String[] args) throws Exception{
         Student.getStudenti();
-        String[] prenume = new String[]{"Ionut", "Mihai"};
-        Student s1 = new Student("CTI023431", "Paulescu", prenume, LocalDate.of(1992, 10, 11), LocalDate.of(2024, 07, 21));
+        String[] prenume = new String[]{"Alin"};
+        Student s1 = new Student("CTI024567", "Mihailescu", prenume, LocalDate.of(1994, 10, 11), LocalDate.of(2024, 07, 21));
         s1.adaugareStudent();
-        Student.stergereStudent("CTI023431");
-        Student.updateNumefamilie("Popescu", "CTI022106");
-        Student.dataNastere(LocalDate.of(2002, 10, 02), "CTI022105");
+        Student.stergereStudent("CTI024567");
+//        Student.updateNumefamilie("Popescu", "CTI022106");
+//        Student.dataNastere(LocalDate.of(2002, 10, 02), "CTI022105");
     } // testare functionalitati studenti
 
     public static void main3(String[] args) {
