@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.*;
 import java.sql.Date;
 
@@ -19,16 +20,42 @@ public class Student {
     private int varsta;
     private String cale_poza;
     private ArrayList<Nota> note = new ArrayList<Nota>();
+    public static ArrayList<String> listaNrMatricole = new ArrayList<String>();
 
-    public Student(String nrMatricol, String numeFamilie, String[] prenume, LocalDate dataNAstere, LocalDate dataInmatriculare) {
+    public Student(String nrMatricol, String numeFamilie, String[] prenume, LocalDate dataNAstere, LocalDate dataInmatriculare) throws Exception{
+        if(nrMatricol == null || numeFamilie == null || prenume.length == 0 || dataNAstere == null || dataInmatriculare == null){
+            return;
+        }
+        if(RegularExpresion.RegularExpresionNrMatricol(nrMatricol) == false){
+            FormatException fnm = new FormatException(nrMatricol,FormatException.NR_MATRICOL_FORMAT);
+            throw fnm;
+        }
+        for(String nr : listaNrMatricole){
+            if(nrMatricol == nr){
+                StudentNeadecvat stn = new StudentNeadecvat(StudentNeadecvat.UNICITATE,nrMatricol);
+                throw stn;
+            }
+        }
         this.nrMatricol = nrMatricol;
+        listaNrMatricole.add(this.nrMatricol);
+        if(RegularExpresion.RegularExpresionNumePrenume(numeFamilie)){
+            FormatException fnf = new FormatException(numeFamilie,FormatException.NUME_PRENUME_FORMAT);
+            throw fnf;
+        }
         this.numeFamilie = numeFamilie;
+        for(int i = 0; i < prenume.length; i++){
+            if(RegularExpresion.RegularExpresionNumePrenume(prenume[i])){
+                FormatException fnf = new FormatException(prenume[i],FormatException.NUME_PRENUME_FORMAT);
+                throw fnf;
+            }
+        }
         this.prenume = prenume;
         this.dataNAstere = dataNAstere;
         this.dataInmatriculare = dataInmatriculare;
+        this.setVarsta();
     }
 
-    public static ArrayList<Student> getStudenti(){
+    public static ArrayList<Student> getStudenti() throws Exception{
         ArrayList<Student> studenti = new ArrayList<Student>();
         try {
             Statement st = DBConnection.getInstance().getConnection().createStatement();
@@ -141,7 +168,12 @@ public class Student {
     }
 
 
-
+    public void setVarsta(){
+        Period dif = Period.between(this.dataNAstere, this.dataInmatriculare);
+        int nrAniBisecti = (this.dataInmatriculare.getYear() - this.dataNAstere.getYear()) / 4;
+        int age = dif.getYears() - nrAniBisecti;
+        this.varsta = age / 365;
+    }
 }
 
 

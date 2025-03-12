@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Main {
-    public static void main2(String[] args) {
+    public static void main2(String[] args) throws Exception{
         Student.getStudenti();
         String[] prenume = new String[]{"Ionut", "Mihai"};
         Student s1 = new Student("CTI023431", "Paulescu", prenume, LocalDate.of(1992, 10, 11), LocalDate.of(2024, 07, 21));
