@@ -1,5 +1,7 @@
 package model;
 
+import org.apache.poi.ss.formula.functions.T;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -93,7 +95,15 @@ public class NotaCalificativ extends Nota{
     } // end stergere nota calificativ
 
     public static void updateNota( TipCalificativ tc, int codDisciplina,String codStudent){
-        String str = "UPDATE note SET Valoare_Nota='" + tc + "' WHERE Numar_Matricol_Student='" + codStudent + "' AND Cod_Disciplina_Nota=" + codDisciplina;
+        int promovat = 0;
+        boolean c1 = tc.getDenumire().equals(TipCalificativ.EXCELENT.getDenumire());
+        boolean c2 = tc.getDenumire().equals(TipCalificativ.FOARTE_BINE.getDenumire());
+        boolean c3 = tc.getDenumire().equals(TipCalificativ.BINE.getDenumire());
+        boolean c4 = tc.getDenumire().equals(TipCalificativ.SUFICIENT.getDenumire());
+        if(c1 || c2 || c3 || c4){
+            promovat = 1;
+        }
+        String str = "UPDATE note SET Valoare_Nota='" + tc + "', Promovat=" + promovat +" WHERE Numar_Matricol_Student='" + codStudent + "' AND Cod_Disciplina_Nota=" + codDisciplina;
         try{
             Statement st = DBConnection.getInstance().getConnection().createStatement();
             st.execute(str);
@@ -101,4 +111,8 @@ public class NotaCalificativ extends Nota{
             DBConnection.logger.info(sql.getSQLState());
         }
     } // end update nota calificativ
+
+    public String getCalificativ() {
+        return calificativ.getDenumire();
+    }
 }
