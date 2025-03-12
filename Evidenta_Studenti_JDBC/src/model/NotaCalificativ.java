@@ -11,6 +11,7 @@ import java.util.Date;
 
 public class NotaCalificativ extends Nota{
     private TipCalificativ calificativ;
+    public TipCalificativ valoarea = TipCalificativ.SUFICIENT;
 
     public NotaCalificativ(TipNota tip_nota, String numar_matricol, int cod_disciplina, LocalDate data_examen, TipCalificativ calificativ, int promovat) {
         super(tip_nota, numar_matricol, cod_disciplina, data_examen, promovat);
@@ -114,5 +115,9 @@ public class NotaCalificativ extends Nota{
 
     public String getCalificativ() {
         return calificativ.getDenumire();
+    }
+
+    public void setNotaFinala(){
+        this.valoarea = calificativ;
     }
 }

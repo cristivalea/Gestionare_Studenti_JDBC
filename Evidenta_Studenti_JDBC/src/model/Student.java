@@ -80,14 +80,19 @@ public class Student {
 
     @Override
     public String toString() {
-        return "model.Student{" +
+        return "Student{" +
                 "nrMatricol='" + nrMatricol + '\'' +
                 ", numeFamilie='" + numeFamilie + '\'' +
                 ", prenume=" + Arrays.toString(prenume) +
                 ", dataNAstere=" + dataNAstere +
-                ", dataInmatriculare=" + dataInmatriculare
-                + "}";
+                ", dataInmatriculare=" + dataInmatriculare +
+                ", varsta=" + varsta +
+                ", cale_poza='" + cale_poza + '\'' +
+                ", note=" + note +
+                '}';
     }
+
+
 
     public static void stergereStudent(String nrMatricol){
         String str = "DELETE FROM studenti WHERE Numar_Matricol=" + "'" + nrMatricol + "'";
@@ -173,6 +178,14 @@ public class Student {
         int nrAniBisecti = (this.dataInmatriculare.getYear() - this.dataNAstere.getYear()) / 4;
         int age = dif.getYears() - nrAniBisecti;
         this.varsta = age / 365;
+    }
+
+    public ArrayList<Nota> getNote() {
+        return note;
+    }
+
+    public static ArrayList<String> getListaNrMatricole() {
+        return listaNrMatricole;
     }
 }
 

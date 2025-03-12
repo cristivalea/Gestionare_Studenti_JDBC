@@ -62,4 +62,10 @@ public class Main {
         //NotaCalificativ.stergereNota(999, "CTI024873");
         NotaCalificativAR.updateNota(TipCalificativAR.RESPINS, 107, "CTI024873");
     } // end main nota califictiv a/r
+
+    public static void main(String[] args) throws Exception{
+       for(int i = 0; i < Repository.getInstance().getStiudenti().size(); i++){
+           System.out.println(Repository.getInstance().getStiudenti().get(i));
+       }
+    }
 }

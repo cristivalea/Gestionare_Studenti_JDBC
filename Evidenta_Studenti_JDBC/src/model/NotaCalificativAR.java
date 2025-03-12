@@ -10,6 +10,7 @@ import java.util.Date;
 public class NotaCalificativAR extends Nota{
 
     private TipCalificativAR calificativ;
+    public TipCalificativAR notaFianala = TipCalificativAR.RESPINS;
 
     public NotaCalificativAR(TipNota tip_nota, String numar_matricol, int cod_disciplina, LocalDate data_examen, TipCalificativAR calificativ, int promovat) {
         super(tip_nota, numar_matricol, cod_disciplina, data_examen, promovat);
@@ -102,5 +103,9 @@ public class NotaCalificativAR extends Nota{
 
     public TipCalificativAR getCalificativ() {
         return calificativ;
+    }
+
+    public void setNotaFinala(){
+        this.notaFianala = calificativ;
     }
 }

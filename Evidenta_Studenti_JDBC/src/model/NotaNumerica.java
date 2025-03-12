@@ -14,6 +14,7 @@ import java.util.Date;
 public class NotaNumerica extends Nota{
 
     private int notaFinala;
+    public int valoare;
 
     public NotaNumerica(TipNota tip_nota, String numar_matricol, int cod_disciplina, LocalDate data_examen, int notaFinala, int promovat) {
         super(tip_nota, numar_matricol, cod_disciplina, data_examen, promovat);
@@ -99,4 +100,8 @@ public class NotaNumerica extends Nota{
             DBConnection.logger.info(sql.getSQLState());
         }
     } // end update nota
+
+    public void setNotaFinala(){
+        this.valoare = notaFinala;
+    }
 }
