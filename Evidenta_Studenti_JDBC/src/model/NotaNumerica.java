@@ -21,6 +21,8 @@ public class NotaNumerica extends Nota{
         this.notaFinala = notaFinala;
     }
 
+
+
     public  static ArrayList<Nota> getNote(){
         ArrayList<Nota> noteNumerice = new ArrayList<Nota>();
         try{

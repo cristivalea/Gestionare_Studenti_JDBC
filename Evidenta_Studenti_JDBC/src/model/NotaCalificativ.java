@@ -16,9 +16,10 @@ public class NotaCalificativ extends Nota{
     public NotaCalificativ(TipNota tip_nota, String numar_matricol, int cod_disciplina, LocalDate data_examen, TipCalificativ calificativ, int promovat) {
         super(tip_nota, numar_matricol, cod_disciplina, data_examen, promovat);
         this.calificativ = calificativ;
-    }
+    };
 
-    public  static ArrayList<Nota> getNoteCalificativ(){
+
+        public  static ArrayList<Nota> getNoteCalificativ(){
         ArrayList<Nota> noteNumerice = new ArrayList<Nota>();
         try{
             Statement st = DBConnection.getInstance().getConnection().createStatement();
