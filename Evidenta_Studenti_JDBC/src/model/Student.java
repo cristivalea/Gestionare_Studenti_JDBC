@@ -50,6 +50,13 @@ public class Student {
         this.setVarsta();
     }
 
+    public Student(String nume, LocalDate dataNastere, LocalDate dataInmatriculare, String[] array) {
+        this.numeFamilie = nume;
+        this.dataNAstere = dataNastere;
+        this.dataInmatriculare = dataInmatriculare;
+        this.prenume = array;
+    }
+
     public static ArrayList<Student> getStudenti() throws Exception{
         ArrayList<Student> studenti = new ArrayList<Student>();
         try {
