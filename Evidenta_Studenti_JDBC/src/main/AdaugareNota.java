@@ -108,6 +108,6 @@ public class AdaugareNota implements Comand{
                     break;
                 }
             } // end switch
-        Repository.getInstance().adaugareNota(this.student, nota);
+       // Repository.getInstance().adaugareNota(this.student, nota);
     } // end execute
 }
