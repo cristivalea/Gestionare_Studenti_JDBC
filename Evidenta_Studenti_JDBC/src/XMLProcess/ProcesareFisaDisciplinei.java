@@ -1,20 +1,21 @@
 package XMLProcess;
 
-import model.Disciplina;
-import model.Repository;
+import model.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import teste.Main2;
+import sun.util.resources.LocaleData;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -53,7 +54,6 @@ public class ProcesareFisaDisciplinei {
             }
             else {
                 denumireDisciplinaFisa = numeDisciplina;
-                Main2.logger.info("Nume dsiciplina: " + numeDisciplina);
             }
 
             String categFormativa = e.getElementsByTagName("Categorie_formativa").item(0).getTextContent().trim();
@@ -62,7 +62,6 @@ public class ProcesareFisaDisciplinei {
             }
             else {
                 categoriaFormativa = CategorieFormativa.string2CategorieFormativa(categFormativa).get();
-                Main2.logger.info("Categoria formativa: " + categFormativa);
             }
             String titularCurs = e.getElementsByTagName("Titularul_activitatilor_de_curs").item(0).getTextContent().trim();
             if(titularCurs == null){
@@ -70,7 +69,6 @@ public class ProcesareFisaDisciplinei {
             }
             else {
                 titular = titularCurs;
-                Main2.logger.info("titular curs: " + titularCurs);
             }
 
             String string_sef_lucrari = e.getElementsByTagName("Titularul_activitatilor_aplicative").item(0).getTextContent().trim();
@@ -78,7 +76,6 @@ public class ProcesareFisaDisciplinei {
                 System.err.println("Nu exista valoare!");
             }
             else {
-                Main2.logger.info("Titular activitati aplicative: " + string_sef_lucrari);
                 Scanner sc1 = new Scanner(string_sef_lucrari);
                 sc1.useDelimiter(",");
                 ArrayList<String> sef_lucrari = new ArrayList<String>();
@@ -86,7 +83,6 @@ public class ProcesareFisaDisciplinei {
                     sef_lucrari.add(sc1.next());
                 }
                 titularA = sef_lucrari;
-                Main2.logger.info("Sef lucrari: " + sef_lucrari);
             }
 
             int an = -1;
@@ -97,7 +93,6 @@ public class ProcesareFisaDisciplinei {
             else {
                 an = Integer.parseInt(string_an);
                 anStudii = an;
-                Main2.logger.info("An studiu: " + an);
             }
 
             int semestru = -1;
@@ -108,7 +103,6 @@ public class ProcesareFisaDisciplinei {
             else {
                 semestru = Integer.parseInt(string_sem);
                 semestrul = semestru;
-                Main2.logger.info("Semestrul: " + semestru);
             }
 
             String tip_evaluare = "";
@@ -119,7 +113,6 @@ public class ProcesareFisaDisciplinei {
             else {
                 tip_evaluare = string_tip_evaluare;
                 tipEvaluare = TipExamen.string2CategorieFormativa(tip_evaluare).get();
-                Main2.logger.info("Tip de evaluare: " + tip_evaluare);
             }
 
             String regimulDisciplinei = e.getElementsByTagName("Regimul_disciplinei").item(0).getTextContent().trim();
@@ -128,7 +121,6 @@ public class ProcesareFisaDisciplinei {
             }
             else
                 regimDisc = RegimDisciplina.string2CategorieFormativa(regimulDisciplinei).get();
-                 Main2.logger.info("Regimul disciplinei: " + regimulDisciplinei);
         }//enf if verificare element
 
         double oreTotaleAsistIntegralSapt = -1;
@@ -177,7 +169,6 @@ public class ProcesareFisaDisciplinei {
                 else {
                     valoare = Double.parseDouble(string_val);
                     oreTotaleAsistIntegralSapt = valoare;
-                    Main2.logger.info("Valoare ore asistate saptamana: " + valoare);
                 }
 
                 double ore_curs = -1;
@@ -188,7 +179,6 @@ public class ProcesareFisaDisciplinei {
                 else {
                     ore_curs = Double.parseDouble(string_ore_curs);
                     oreCursIntegralSapt = ore_curs;
-                    Main2.logger.info("Numar ore curs: " + ore_curs);
                 }
 
                 double ore_lab = -1;
@@ -199,7 +189,6 @@ public class ProcesareFisaDisciplinei {
                 else {
                     ore_lab = Double.parseDouble(string_ore_lab);
                     oreLabIntegralSapt = ore_lab;
-                    Main2.logger.info("Numar ore de laborator pe saptamnana: " + ore_lab);
                 }
             }//end if n21
 
@@ -218,7 +207,6 @@ public class ProcesareFisaDisciplinei {
                 else {
                     nr_ore_sem = Double.parseDouble(str_ore_sem);
                     oreTotalAsistIntegralSem = nr_ore_sem;
-                    Main2.logger.info("Nr de ore pe semestru: " + nr_ore_sem);
                 }
 
                 double nr_ore_curs = -1;
@@ -229,7 +217,6 @@ public class ProcesareFisaDisciplinei {
                 else {
                     nr_ore_curs = Double.parseDouble(string_ore_curs);
                     oreCursIntegralSem = nr_ore_curs;
-                    Main2.logger.info("Nr de ore de curs pe semestru: " + nr_ore_curs);
                 }
 
                 double nr_ore_lab = -1;
@@ -240,7 +227,6 @@ public class ProcesareFisaDisciplinei {
                 else {
                     nr_ore_lab = Double.parseDouble(string_ore_lab);
                     oreLabIntegralSem = nr_ore_lab;
-                    Main2.logger.info("Numarul de ore de laborator:  " + nr_ore_lab);
                 }
             }// end if n22
 
@@ -259,7 +245,6 @@ public class ProcesareFisaDisciplinei {
                 else {
                     nr_total_ore = Double.parseDouble(string_nr_total_ore);
                     oreTotalAsistPartSapt = nr_total_ore;
-                    Main2.logger.info("Nr de ore asistate partial pe saptamana: " + nr_total_ore);
                 }
 
                 double ore_curs = -1;
@@ -270,7 +255,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     ore_curs = Double.parseDouble(string_ore_practica);
                     oreCursPartsapt = ore_curs;
-                    Main2.logger.info("Nr de ore de practica: " + ore_curs);
                 }
 
                 double ore_elab_proiect = -1;
@@ -281,7 +265,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     ore_elab_proiect = Double.parseDouble(string_elab_proiect);
                     oreLabPartSapt = ore_elab_proiect;
-                    Main2.logger.info("Nr ore de elaborare proiect de diploma:  " + ore_elab_proiect);
                 }
             }// end if n23
 
@@ -300,7 +283,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     nr_total_ore = Double.parseDouble(string_nr_total_ore);
                     oreTotalAsistPartSem = nr_total_ore;
-                    Main2.logger.info("Nr total de ore asistate partial pe semestru: " + nr_total_ore);
                 }
 
                 double ore_practica = -1;
@@ -311,7 +293,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     ore_practica = Double.parseDouble(string_ore_practica);
                     oreCursPartSem = ore_practica;
-                    Main2.logger.info("Ore de practica: " + ore_practica);
                 }
 
                 double ore_diploma = -1;
@@ -322,7 +303,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     ore_diploma = Double.parseDouble(string_ore_diploma);
                     oreLabParSem = ore_diploma;
-                    Main2.logger.info("Ore pregatire proiect de diploma: " + ore_diploma);
                 }
             }// end if n24
 
@@ -341,7 +321,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     nr_total = Double.parseDouble(string_nr_total);
                     oreNeasistateSapt = nr_total;
-                    Main2.logger.info("Nr total de ore neasistate: " + nr_total);
                 }
 
                 double ore_doc_suplimentara = -1;
@@ -352,7 +331,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     ore_doc_suplimentara = Double.parseDouble(string_ore_doc_sup);
                     oreDocSupsapt = ore_doc_suplimentara;
-                    Main2.logger.info("Ore documentare suplimentare: " + ore_doc_suplimentara);
                 }
 
                 double ore_studiu_ind = -1;
@@ -363,7 +341,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     ore_studiu_ind = Integer.parseInt(string_ore_studiu_ind);
                     oreStudiuIndividualSapt = ore_studiu_ind;
-                    Main2.logger.info("Ore de studiu individual: " + ore_studiu_ind);
                 }
 
                 double ore_preg_lab = -1;
@@ -374,7 +351,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     ore_preg_lab = Double.parseDouble(string_ore_preg_lab);
                     orePregLabSapt = ore_preg_lab;
-                    Main2.logger.info("Ore de pregatire a laboratorului: " + ore_preg_lab);
                 }
             }// end if n25
 
@@ -393,7 +369,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     ore_totale = Double.parseDouble(string_ore_totale);
                     oreNeasistateSem = ore_totale;
-                    Main2.logger.info("Ore totale neasistate pe semestru: " + ore_totale);
                 }
 
                 double ore_doc_sup = -1;
@@ -404,7 +379,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     ore_doc_sup = Double.parseDouble(string_ore_doc_sup);
                     oreDocSupSem = ore_doc_sup;
-                    Main2.logger.info("Ore de doc suplimetara neasistate: " + ore_doc_sup);
                 }
 
                 double ore_studiu_ind = -1;
@@ -415,7 +389,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     ore_studiu_ind = Integer.parseInt(string_ore_studiu_ind);
                     oreStudiuIndividualSem = ore_studiu_ind;
-                    Main2.logger.info("Ore de studiu individual neasistate: " + ore_studiu_ind);
                 }
 
                 double ore_preg_lab = -1;
@@ -426,7 +399,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     ore_preg_lab = Double.parseDouble(string_ore_preg_lab);
                     orePregLabSem = ore_preg_lab;
-                    Main2.logger.info("Ore de pregatire lab neasistate: " + ore_preg_lab);
                 }
             }// end if n26
 
@@ -437,7 +409,6 @@ public class ProcesareFisaDisciplinei {
                 } else {
                     total_ore_sapt = Double.parseDouble(string_total_ore_sapt);
                     totalSapt = total_ore_sapt;
-                    Main2.logger.info("Nr total de ore pe saptamana: " + total_ore_sapt);
                 }
 
                double total_ore_sem = -1;
@@ -448,7 +419,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     total_ore_sem = Double.parseDouble(string_total_ore_sem);
                     TotalSem = total_ore_sem;
-                    Main2.logger.info("total ore pe semestru: " + total_ore_sem);
                 }
 
                 double nr_credite = 0;
@@ -459,7 +429,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     nr_credite = Double.parseDouble(string_nr_credite);
                     nrCrediteDisciplina = nr_credite;
-                    Main2.logger.info("Nr de credite: " + nr_credite);
                 }
         }//end if n2
 
@@ -483,12 +452,11 @@ public class ProcesareFisaDisciplinei {
                         while (sc2.hasNext()) {
                             String denumireDisciplina = sc2.next();
                             for (Disciplina dis : Repository.getInstance().getDiscipline()) {
-                                if (dis.getNumeDisciplina().equals(denumireDisciplina)) {
+                                if (dis.getNumedisciplina().equals(denumireDisciplina)) {
                                     curriculum.add(dis);
                                 }// end id cautare disciplina
                             } // end for parcurgere lista discipline rep
                         }// end while
-                        Main2.logger.info("Discipline curriculum: " + curriculum);
                         listaCurriculum = curriculum;
                     }catch (Exception ee){
                         ee.printStackTrace();
@@ -500,7 +468,6 @@ public class ProcesareFisaDisciplinei {
                 }
                 else {
                     listaCompetente = competente;
-                    Main2.logger.info("Competente: " + competente);
                 }//end if atribuire
         }// end if n3
 
@@ -520,7 +487,6 @@ public class ProcesareFisaDisciplinei {
             }
             else {
                 conDesfCurs = desfasurare_curs;
-                Main2.logger.info("Conditii dsfasurare curs: " + desfasurare_curs);
             }
 
             String desfasurare_aplicative = e.getElementsByTagName("de_desfasurare_a_activitatilor_aplicative").item(0).getTextContent().trim();
@@ -529,7 +495,6 @@ public class ProcesareFisaDisciplinei {
             }
             else {
                 condDesfActAplicat = desfasurare_aplicative;
-                Main2.logger.info("Conditii de desfasurare activitati aplicative: " + desfasurare_aplicative);
             }
         }//end if n4
 
@@ -557,11 +522,9 @@ public class ProcesareFisaDisciplinei {
                    Node nodeCS =  listaNoduriCS.item(i);
                    String competenta = nodeCS.getTextContent();
                    competenteSpecifice.add(competenta);
-                   Main2.logger.info("Competenta: " + competenta);
                 }// end for
             }// end if n51 comp specifice
             listaCompetenteSpecifice = competenteSpecifice;
-            Main2.logger.info("Lista competente specifice: " + competenteSpecifice);
 
             ArrayList<String> competenteProfesionale = new ArrayList<String>();
             NodeList nl52 = d.getElementsByTagName("Competentele_profesionale_in_care_se_inscriu_competentele_specifice");
@@ -579,7 +542,6 @@ public class ProcesareFisaDisciplinei {
                 }//end for
             }//end if
             listaCompetenteProfesionale = competenteProfesionale;
-            Main2.logger.info("Competente profesionale: " + competenteProfesionale);
 
             ArrayList<String> competenteTransversale = new ArrayList<String>();
             NodeList nl53 = d.getElementsByTagName("Competente_transversale_in_care_se_inscriu_competentele_specifice");
@@ -597,7 +559,6 @@ public class ProcesareFisaDisciplinei {
                 }//end for
             }// end if
             listaCompetenteTransversale = competenteTransversale;
-            Main2.logger.info("Competente transversale: " + competenteTransversale);
         }// end n5
 
         ArrayList<String> obiectiveGenerale = new ArrayList<String>();
@@ -624,7 +585,6 @@ public class ProcesareFisaDisciplinei {
                     obiectiveGenerale.add(obiectivGeneral);
                 }//end for
             }//end if n61
-            Main2.logger.info("Obiective generale: " + obiectiveGenerale);
 
             NodeList nl62 = d.getElementsByTagName("Obiectivele_specifice");
             System.out.println("---------------------------");
@@ -640,7 +600,6 @@ public class ProcesareFisaDisciplinei {
                     obiectiveSpecifice.add(obiectivSpecific);
                 }//end for
             }//end if n62
-            Main2.logger.info("Obiective specifice: " + obiectiveSpecifice);
         }// end if n6
 
         //CONTINUT CURS
@@ -661,7 +620,7 @@ public class ProcesareFisaDisciplinei {
                 System.err.println("NU exista valoare!");
             }
             else{
-                Main2.logger.info("Continutul cursului: " + continut);
+                System.err.println("valori");
             }
 
             int nr_ore = -1;
@@ -671,13 +630,11 @@ public class ProcesareFisaDisciplinei {
             }
             else{
                 nr_ore = Integer.parseInt(string_nr_ore);
-                Main2.logger.info("Nr de ore:" + nr_ore);
             }
 
             Pereche<String, Integer> p = new Pereche<String, Integer>(continut,nr_ore);
             curs.add(p);
         }//end for curs
-        Main2.logger.info("Curs: " + curs);
 
         String metodeDePredareCurs = d.getElementsByTagName("Metode_de_predare_curs").item(0).getTextContent().trim();
         if(metodeDePredareCurs == null){
@@ -685,7 +642,6 @@ public class ProcesareFisaDisciplinei {
         }
         else{
             metodeleDePredare = metodeDePredareCurs;
-            Main2.logger.info("Metode predare curs: " + metodeDePredareCurs);
         }// end metode de predare ccurs
 
 
@@ -700,7 +656,7 @@ public class ProcesareFisaDisciplinei {
                 System.err.println("Nu exista valoare");
             }
             else{
-                Main2.logger.info("Autori: " + autori);
+                System.err.println("autori");
             }//end if autori
 
             String titlu = e21.getElementsByTagName("Titlu").item(0).getTextContent().trim();
@@ -708,7 +664,7 @@ public class ProcesareFisaDisciplinei {
                 System.err.println("Nu exista informatie!");
             }
             else {
-                Main2.logger.info("Titlu: " + titlu);
+                System.err.println("info");
             }// end if titlu
 
             String editura = e21.getElementsByTagName("Editura").item(0).getTextContent().trim();
@@ -716,7 +672,7 @@ public class ProcesareFisaDisciplinei {
                 System.err.println("Nu exista informatie!");
             }
             else{
-                Main2.logger.info("Editura: " + editura);
+                System.err.println("editura");
             }// end if editura
 
             String orasAparitie = e21.getElementsByTagName("Oras").item(0).getTextContent().trim();
@@ -724,7 +680,7 @@ public class ProcesareFisaDisciplinei {
                 System.err.println("Nu exista informatie!");
             }
             else{
-                Main2.logger.info("Oras Aparitie: " + orasAparitie);
+                System.err.println("oras aparitie");
             }// end if oras aparitie
 
             int anAparitie = -1;
@@ -734,7 +690,6 @@ public class ProcesareFisaDisciplinei {
             }
             else{
                 anAparitie = Integer.parseInt(stringAnAparitie);
-                Main2.logger.info("Anul aparitiei: " + anAparitie);
             }// end if an aparitie
             Publicatie publicatie = new Publicatie(titlu, editura,orasAparitie, anAparitie, autori);
             bibliografieCurs.add(publicatie);
@@ -751,7 +706,7 @@ public class ProcesareFisaDisciplinei {
                 System.err.println("Nu exita valoare!");
             }
             else{
-                Main2.logger.info("Continut laborator: " + continut);
+                System.err.println("continut");
             }// end if
 
             int nr_ore = -1;
@@ -761,13 +716,12 @@ public class ProcesareFisaDisciplinei {
             }
             else{
                 nr_ore = Integer.parseInt(string_nr_ore);
-                Main2.logger.info("Nr de ore:" + nr_ore);
             }
 
             Pereche<String, Integer> p = new Pereche<String, Integer>(continut,nr_ore);
             laborator.add(p);
         }// end for lab
-        Main2.logger.info("Laborator: " + laborator);
+
 
         String metodeDePredareLab = d.getElementsByTagName("Metode_de_predare_lab").item(0).getTextContent().trim();
         if(metodeDePredareLab == null){
@@ -775,7 +729,6 @@ public class ProcesareFisaDisciplinei {
         }
         else{
             metodeleDePredareLab = metodeDePredareLab;
-            Main2.logger.info("Metode predare lab: " + metodeDePredareLab);
         }// end metode de predare ccurs
 
         NodeList nl81 = d.getElementsByTagName("Bibliografie_Lab");
@@ -789,7 +742,7 @@ public class ProcesareFisaDisciplinei {
                 System.err.println("Nu exista valoare");
             }
             else{
-                Main2.logger.info("Autori: " + autori);
+                System.err.println("autori");
             }//end if autori
 
             String titlu = e31.getElementsByTagName("Titlu").item(0).getTextContent().trim();
@@ -797,7 +750,7 @@ public class ProcesareFisaDisciplinei {
                 System.err.println("Nu exista informatie!");
             }
             else {
-                Main2.logger.info("Titlu: " + titlu);
+                System.err.println("titlu");
             }// end if titlu
 
             String editura = e31.getElementsByTagName("Editura").item(0).getTextContent().trim();
@@ -805,7 +758,7 @@ public class ProcesareFisaDisciplinei {
                 System.err.println("Nu exista informatie!");
             }
             else{
-                Main2.logger.info("Editura: " + editura);
+                System.err.println("editura");
             }// end if editura
 
             String orasAparitie = e31.getElementsByTagName("Oras").item(0).getTextContent().trim();
@@ -813,7 +766,7 @@ public class ProcesareFisaDisciplinei {
                 System.err.println("Nu exista informatie!");
             }
             else{
-                Main2.logger.info("Oras Aparitie: " + orasAparitie);
+                System.err.println("orasAparitie");
             }// end if oras aparitie
 
             int anAparitie = -1;
@@ -823,7 +776,6 @@ public class ProcesareFisaDisciplinei {
             }
             else{
                 anAparitie = Integer.parseInt(stringAnAparitie);
-                Main2.logger.info("Anul aparitiei: " + anAparitie);
             }// end if an aparitie
             Publicatie publicatie = new Publicatie(titlu, editura,orasAparitie, anAparitie, autori);
             bibliografieLab.add(publicatie);
@@ -846,7 +798,6 @@ public class ProcesareFisaDisciplinei {
                 coroborareContinut.add(coroborare);
             }//end for
         }// end if
-        Main2.logger.info("Coroborare continut: " + coroborareContinut);
 
         //EVALUARE
 
@@ -900,7 +851,6 @@ public class ProcesareFisaDisciplinei {
                 }
                 else{
                     numeActivitateCurs = denumire;
-                    Main2.logger.info("Denumire: " + denumire);
                 }//end if denumire
 
                 String criteriiEvaluare = e1.getElementsByTagName("Criterii_de_evaluare").item(0).getTextContent().trim();
@@ -909,7 +859,6 @@ public class ProcesareFisaDisciplinei {
                 }
                 else{
                     numeCritevalCurs = criteriiEvaluare;
-                    Main2.logger.info("Criterii de evaluare curs: " + criteriiEvaluare);
                 }// end if criterii de evaluare
 
                 String metodeEvaluare = e1.getElementsByTagName("Metode_de_evaluare").item(0).getTextContent().trim();
@@ -918,7 +867,6 @@ public class ProcesareFisaDisciplinei {
                 }
                 else{
                     numeMetEvalCurs = metodeEvaluare;
-                    Main2.logger.info("Metode de evaluare: " + metodeEvaluare);
                 }// end if metode de evaluare
 
                 double pondereCurs = -1;
@@ -929,7 +877,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     coefCurs = pondereCurs;
                     pondereCurs = Double.parseDouble(string_pondere_curs);
-                    Main2.logger.info("Pondere curs: " + pondereCurs);
                 }// end if pondere curs
             }// end if n111
 
@@ -946,7 +893,6 @@ public class ProcesareFisaDisciplinei {
                 }
                 else{
                     numeActivitateLab = denumire;
-                    Main2.logger.info("Denumire activitati aplicative: " + denumire);
                 }// end if denumire activitati aplicative
 
                 String criteriiEvaluare = e1.getElementsByTagName("Criterii_de_evaluare").item(0).getTextContent().trim();
@@ -955,7 +901,6 @@ public class ProcesareFisaDisciplinei {
                 }
                 else {
                     numeCritEvalLab = criteriiEvaluare;
-                    Main2.logger.info("Creiterii de evaluare lab: " + criteriiEvaluare);
                 }// end criterii evaluare
 
                 String metodeEvaluare = e1.getElementsByTagName("Metode_de_evaluare").item(0).getTextContent().trim();
@@ -964,7 +909,6 @@ public class ProcesareFisaDisciplinei {
                 }
                 else{
                     numeMetEvalLab = metodeEvaluare;
-                    Main2.logger.info("Metode de evaluare: " + metodeEvaluare);
                 }// end if metode de evaluare
 
                 double pondereLab = -1;
@@ -975,7 +919,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     coefLab = pondereLab;
                     pondereLab = Double.parseDouble(string_pondere_lab);
-                    Main2.logger.info(string_pondere_lab);
                 }// end if pondere lab
             }// end if n112
 
@@ -992,7 +935,6 @@ public class ProcesareFisaDisciplinei {
                 }
                 else{
                     numeActivitateProiect = denumire;
-                    Main2.logger.info("Denumire activitati aplicative: " + denumire);
                 }// end if denumire activitati aplicative
 
                 String criteriiEvaluare = e1.getElementsByTagName("Criterii_de_evaluare").item(0).getTextContent().trim();
@@ -1001,7 +943,6 @@ public class ProcesareFisaDisciplinei {
                 }
                 else {
                     numeCritEvalProiect = criteriiEvaluare;
-                    Main2.logger.info("Creiterii de evaluare lab: " + criteriiEvaluare);
                 }// end criterii evaluare
 
                 String metodeEvaluare = e1.getElementsByTagName("Metode_de_evaluare").item(0).getTextContent().trim();
@@ -1010,7 +951,6 @@ public class ProcesareFisaDisciplinei {
                 }
                 else{
                     numeMetEvalProiect = metodeEvaluare;
-                    Main2.logger.info("Metode de evaluare: " + metodeEvaluare);
                 }// end if metode de evaluare
 
                 double pondereProiect = -1;
@@ -1021,7 +961,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     coefProiect = pondereProiect;
                     pondereProiect = Double.parseDouble(string_pondere_proiect);
-                    Main2.logger.info(string_pondere_proiect);
                 }// end if pondere lab
             }// end if n113
 
@@ -1038,7 +977,6 @@ public class ProcesareFisaDisciplinei {
                 }
                 else{
                     numeActivitatePrezenta = denumire;
-                    Main2.logger.info("Denumire activitati aplicative: " + denumire);
                 }// end if denumire activitati aplicative
 
                 String criteriiEvaluare = e1.getElementsByTagName("Criterii_de_evaluare").item(0).getTextContent().trim();
@@ -1047,7 +985,6 @@ public class ProcesareFisaDisciplinei {
                 }
                 else {
                     numeCritEvalPre = criteriiEvaluare;
-                    Main2.logger.info("Creiterii de evaluare lab: " + criteriiEvaluare);
                 }// end criterii evaluare
 
                 String metodeEvaluare = e1.getElementsByTagName("Metode_de_evaluare").item(0).getTextContent().trim();
@@ -1056,7 +993,6 @@ public class ProcesareFisaDisciplinei {
                 }
                 else{
                     numeMetEvalPrez = metodeEvaluare;
-                    Main2.logger.info("Metode de evaluare: " + metodeEvaluare);
                 }// end if metode de evaluare
 
                 double ponderePrezenta = -1;
@@ -1067,7 +1003,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     coefPrez = ponderePrezenta;
                     ponderePrezenta = Double.parseDouble(string_pondere_prezenta);
-                    Main2.logger.info(string_pondere_prezenta);
                 }// end if pondere lab
             }// end if n114
 
@@ -1077,7 +1012,6 @@ public class ProcesareFisaDisciplinei {
             }
             else{
                 standardMinimPerformanta = standardMinim;
-                Main2.logger.info("Standard minim de performanta: " + standardMinim);
             }// end if standard minim performanta
         }//end if n11
 
@@ -1108,7 +1042,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     zi = Integer.parseInt(string_zi);
                     ziC = zi;
-                    Main2.logger.info("Zi: " + zi);
                 }// end if zi
 
                 int luna = -1;
@@ -1119,7 +1052,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     luna = Integer.parseInt(string_luna);
                     lunaC = luna;
-                    Main2.logger.info("Luna: " + luna);
                 }// end if luna
 
                 int an = -1;
@@ -1130,14 +1062,13 @@ public class ProcesareFisaDisciplinei {
                 else{
                     an = Integer.parseInt(string_an);
                     anC = an;
-                    Main2.logger.info("An : " + an);
                 }// end if an
             }// end if n121
         } //end id n12
 
-        Data dataC = null;
+        LocalDate dataC = null;
         try {
-            dataC = new Data(ziC, lunaC, anC);
+            dataC = LocalDate.of(anC, lunaC, ziC);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -1169,7 +1100,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     zi = Integer.parseInt(string_zi);
                     ziA = zi;
-                    Main2.logger.info("Zi avizare: " + zi);
                 }// end if zi
 
                 int luna = -1;
@@ -1180,7 +1110,6 @@ public class ProcesareFisaDisciplinei {
                 else{
                     luna = Integer.parseInt(string_luna);
                     lunaA = luna;
-                    Main2.logger.info("Lunam avizare: " + luna);
                 }// end if luna
 
                 int an = -1;
@@ -1191,14 +1120,13 @@ public class ProcesareFisaDisciplinei {
                 else{
                     an = Integer.parseInt(string_an);
                     anA = an;
-                    Main2.logger.info("An avizare : " + an);
                 }// end if an
             }// end if n131
         } //end id n13\
 
-        Data dataA = null;
+        LocalDate dataA = null;
         try{
-            dataA = new Data(ziA, lunaA, anA);
+            dataA = LocalDate.of(anA, lunaA, ziA);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -1312,7 +1240,6 @@ public class ProcesareFisaDisciplinei {
                     System.err.println("Disciplina nu a fost parsata bine");
                 }finally {
                     if(fisa != null) {
-                        Main2.logger.info( "Fisa disciplinei: " + fisa.toString());
                         listaFIseDiscipline.add(fisa);
                     }
                 }
