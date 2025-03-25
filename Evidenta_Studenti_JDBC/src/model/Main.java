@@ -75,8 +75,8 @@ public class Main {
        }
     }
 
-    public static void main(String[] args) throws Exception{
-        FisaDisciplinei F = ProcesareFisaDisciplinei.getFisaDisciplina(ProcesareFisaDisciplinei.FILENAME);
+    public static void main9(String[] args) throws Exception{
+       // FisaDisciplinei F = ProcesareFisaDisciplinei.getFisaDisciplina(ProcesareFisaDisciplinei.FILENAME);
         System.out.println(F);
     }
 }
