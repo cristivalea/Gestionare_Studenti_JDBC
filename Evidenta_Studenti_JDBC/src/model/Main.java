@@ -7,11 +7,16 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main1(String[] args) throws Exception{
-        Student.getStudenti();
-        String[] prenume = new String[]{"Alin"};
-        Student s1 = new Student("CTI024567", "Mihailescu", prenume, LocalDate.of(1994, 10, 11), LocalDate.of(2024, 07, 21));
-        s1.adaugareStudent();
-        Student.stergereStudent("CTI024567");
+        //Student.getStudenti();
+//        String[] prenume = new String[]{"Nicolae"};
+//        Student s1 = new Student("CTI024700", "Mihailescu", prenume, LocalDate.of(1994, 10, 11), LocalDate.of(2024, 7, 21));
+//        System.out.println(s1);
+        //s1.adaugareStudent();
+//        ArrayList<Student> studenti = Student.getStudenti();
+//        for(Student s : studenti){
+//            System.out.println(s);
+//        }
+//       Student.stergereStudent("CTI024601");
 //        Student.updateNumefamilie("Popescu", "CTI022106");
 //        Student.dataNastere(LocalDate.of(2002, 10, 02), "CTI022105");
     } // testare functionalitati studenti
@@ -63,7 +68,7 @@ public class Main {
         NotaCalificativAR.updateNota(TipCalificativAR.RESPINS, 107, "CTI024873");
     } // end main nota califictiv a/r
 
-    public static void main(String[] args) throws Exception{
+    public static void main8(String[] args) throws Exception{
        for(int i = 0; i < Repository.getInstance().getStiudenti().size(); i++){
            System.out.println(Repository.getInstance().getStiudenti().get(i));
        }

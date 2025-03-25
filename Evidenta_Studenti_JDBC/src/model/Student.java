@@ -30,12 +30,6 @@ public class Student {
             FormatException fnm = new FormatException(nrMatricol,FormatException.NR_MATRICOL_FORMAT);
             throw fnm;
         }
-        for(String nr : listaNrMatricole){
-            if(nrMatricol.equals(nr)){
-                StudentNeadecvat stn = new StudentNeadecvat(StudentNeadecvat.UNICITATE,nrMatricol);
-                throw stn;
-            }
-        }
         this.nrMatricol = nrMatricol;
         listaNrMatricole.add(this.nrMatricol);
         if(!RegularExpresion.RegularExpresionNumePrenume(numeFamilie)){
@@ -52,6 +46,7 @@ public class Student {
         this.prenume = prenume;
         this.dataNAstere = dataNAstere;
         this.dataInmatriculare = dataInmatriculare;
+        this.cale_poza = "Cale poza";
         this.setVarsta();
     }
 
@@ -175,9 +170,11 @@ public class Student {
 
     public void setVarsta(){
         Period dif = Period.between(this.dataNAstere, this.dataInmatriculare);
-        int nrAniBisecti = (this.dataInmatriculare.getYear() - this.dataNAstere.getYear()) / 4;
-        int age = dif.getYears() - nrAniBisecti;
-        this.varsta = age / 365;
+//        System.out.println(dif);
+//        int nrAniBisecti = (this.dataInmatriculare.getYear() - this.dataNAstere.getYear()) / 4;
+//        int age = dif.getYears() - nrAniBisecti;
+//        System.out.println(age);
+        this.varsta = dif.getYears() + 1;
     }
 
     public ArrayList<Nota> getNote() {
