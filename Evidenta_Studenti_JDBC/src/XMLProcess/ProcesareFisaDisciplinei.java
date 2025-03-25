@@ -21,7 +21,7 @@ import java.util.Scanner;
 
 public class ProcesareFisaDisciplinei {
 
-    //public final static String FILENAME = "D:\\JAVA\\Evidenta Studenti\\Evidenta_Studenti\\src\\XMLProcess\\PAA.xml";
+    //public final static String FILENAME = "D:\\JAVA\\Evidenta Studenti\\FiseDiscipline\\PAA.xml\\";
     private final static String FOLDER_FISE_DISCIPLINE ="D:\\JAVA\\Evidenta Studenti\\FiseDiscipline\\";
 
     public static FisaDisciplinei getFisaDisciplina(String fileName) throws ParserConfigurationException, SAXException, IOException {

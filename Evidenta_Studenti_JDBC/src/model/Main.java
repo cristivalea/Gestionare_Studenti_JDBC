@@ -1,5 +1,6 @@
 package model;
 
+import XMLProcess.ProcesareFisaDisciplinei;
 import org.apache.poi.ss.formula.functions.T;
 
 import java.time.LocalDate;
@@ -72,5 +73,10 @@ public class Main {
        for(int i = 0; i < Repository.getInstance().getStiudenti().size(); i++){
            System.out.println(Repository.getInstance().getStiudenti().get(i));
        }
+    }
+
+    public static void main(String[] args) throws Exception{
+        FisaDisciplinei F = ProcesareFisaDisciplinei.getFisaDisciplina(ProcesareFisaDisciplinei.FILENAME);
+        System.out.println(F);
     }
 }
