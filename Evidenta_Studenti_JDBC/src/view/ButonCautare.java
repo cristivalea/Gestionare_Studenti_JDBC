@@ -26,7 +26,6 @@ public class ButonCautare extends JButton implements Comand {
         try {
             String numeFamilie = this.textNumeText.getText();
 
-
             if (RegularExpresion.RegularExpresionNumePrenume(numeFamilie) == false) {
                 System.err.println("Formatul numelui de familie este gresit!");
                 return;

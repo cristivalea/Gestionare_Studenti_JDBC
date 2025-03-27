@@ -3,12 +3,12 @@ package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+import view.Observer;
 public class Repository {
     private static ArrayList<Disciplina> discipline  = new ArrayList<Disciplina>();
     private static ArrayList<Student> studenti = new ArrayList<Student>();
     private static ArrayList<Nota> note = new ArrayList<Nota>();
-
+    private static ArrayList<Observer> observers = new ArrayList<Observer>();
     private static Repository instance=null;
 
     private Repository() throws Exception {
@@ -84,4 +84,35 @@ public class Repository {
         return note;
     }
 
-}
+    public static void adaugareDisciplina(Disciplina d){
+        d.adaugaDisciplina();
+        discipline.add(d);
+        notifyObservers();
+    }
+
+    public static void adugareStudent(Student s){
+        s.adaugareStudent();
+        studenti.add(s);
+        notifyObservers();
+    }
+
+    public static void adaugaObservatori(Observer obs){
+        observers.add(obs);
+    }
+
+    public static void notifyObservers(){
+        for(Observer o : observers){
+            o.update();
+        }
+    }
+
+    public static void cautareStudentNume(String nume){
+        Student student = null;
+        for(Student s : studenti){
+            if(s.getNumeFamilie().equals(nume)){
+                student = s;
+                break;
+            }
+        }
+    }
+} // end Repository

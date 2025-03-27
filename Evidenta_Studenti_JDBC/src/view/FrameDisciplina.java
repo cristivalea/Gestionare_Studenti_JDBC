@@ -61,7 +61,6 @@ public class FrameDisciplina extends JFrame implements ActionListener{
 
         this.panelCodDsiciplina = new JPanel();
         this.txtCodDisciplina = new JTextField(50);
-        this.txtCodDisciplina.setEditable(false);
         this.labelCodDisciplina = new JLabel("Codul Disciplinei");
         this.panelCodDsiciplina.add(this.labelCodDisciplina);
         this.panelCodDsiciplina.add(this.txtCodDisciplina);

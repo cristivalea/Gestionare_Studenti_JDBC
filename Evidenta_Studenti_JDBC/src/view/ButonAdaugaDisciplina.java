@@ -1,6 +1,7 @@
 package view;
 
 import model.Disciplina;
+import model.Repository;
 
 import javax.swing.*;
 
@@ -47,5 +48,6 @@ public class ButonAdaugaDisciplina extends JButton implements Comand{
         Disciplina disciplina = new Disciplina(codDisciplina, numeDisciplina, coefExamen, coefLab, coefProiect, coefSeminar, coefPrezentaCurs, coefPrezentaLab, coefPrezentaProiect, coefPrezentaSeminar, nrCredite);
         System.out.println(disciplina);
         this.txtCodDisciplina.setText(String.valueOf(disciplina.getCodDisciplina()));
+        Repository.adaugareDisciplina(disciplina);
     }
 }
