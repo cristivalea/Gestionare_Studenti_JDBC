@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Evidenta_Studenti_JDBC">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Evidenta_Studenti_JDBC.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
