@@ -3,6 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+
+import XMLProcess.ProcesareFisaDisciplinei;
 import view.Observer;
 public class Repository {
     private static ArrayList<Disciplina> discipline  = new ArrayList<Disciplina>();
@@ -31,17 +34,33 @@ public class Repository {
                 }
             }
         }
-        Map<String, Student> mapStudenti = new HashMap<>();
-        for (Student s : studenti) {
-            mapStudenti.put(s.getNrMatricol(), s);
-        }
-        for (Nota n : note) {
-            Student s = mapStudenti.get(n.getNumar_matricol());
-            if (s != null) {
-                n.setStudent(s);
-            }
-        }
-        //update
+//        Map<String, Student> mapStudenti = new HashMap<>();
+//        for (Student s : studenti) {
+//            mapStudenti.put(s.getNrMatricol(), s);
+//        }
+//        for (Nota n : note) {
+//            Student s = mapStudenti.get(n.getNumar_matricol());
+//            if (s != null) {
+//                n.setStudent(s);
+//            }
+//        }
+        //incarca fisa disciplinei pentru fiecare disciplina in parte
+//        Optional<ArrayList<FisaDisciplinei>> box = ProcesareFisaDisciplinei.getFiseDiscipline();
+//        ArrayList<FisaDisciplinei> listaFiseDiscipline = new ArrayList<FisaDisciplinei>();
+//        if(box.isPresent() == false){
+//            System.err.println("Nu s-au incarcat disciplinele");
+//        }
+//        else{
+//            listaFiseDiscipline = box.get();
+//        }
+//
+//        for(Disciplina d : discipline){
+//            for(FisaDisciplinei f : listaFiseDiscipline){
+//                if(f.getDenumireDisciplina().equals(d.getNumedisciplina())){
+//                    d.setFisaDisciplinei(f);
+//                }
+//            }
+//        }//end for
     }
 
     public static Repository getInstance() throws Exception {
@@ -50,9 +69,16 @@ public class Repository {
         return instance;
     }
 
+//    private ArrayList<Disciplina> loadDiscipline(){
+//        return Disciplina.getDiscipline();
+//    }
+
     private ArrayList<Disciplina> loadDiscipline(){
-        return Disciplina.getDiscipline();
+        ArrayList<Disciplina> disciplineLoaded = Disciplina.getDiscipline();
+        System.out.println("Discipline incarcate: " + disciplineLoaded.size());
+        return disciplineLoaded;
     }
+
 
     private ArrayList<Nota> loadNote(){
         ArrayList<Nota> note_aux = new ArrayList<Nota>();
@@ -106,7 +132,7 @@ public class Repository {
         }
     }
 
-    public static void cautareStudentNume(String nume){
+    public static Student cautareStudentNume(String nume){
         Student student = null;
         for(Student s : studenti){
             if(s.getNumeFamilie().equals(nume)){
@@ -114,5 +140,10 @@ public class Repository {
                 break;
             }
         }
+        return student;
+    }
+
+    public void stergeStudent(Student student) {
+        return;
     }
 } // end Repository

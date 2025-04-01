@@ -18,6 +18,8 @@ public class Disciplina {
     private double coefPrezentaSeminar;
     int numarCredite;
 
+    private FisaDisciplinei fisaDisciplinei;
+
     public Disciplina(int codDisciplina, String numedisciplina, double coefCurs, double coefLab, double coefProiect, double coefSeminar, double coefPrezentaCurs, double coefPrezentaLab, double coefPrezentaProiect, double coefPrezentaSeminar, int numarCredite) {
         if(codDisciplina >= 100 || codDisciplina < 1000) {
             this.codDisciplina = codDisciplina;
@@ -260,5 +262,10 @@ public class Disciplina {
 
     public int getNumarCredite() {
         return numarCredite;
+    }
+
+    public void setFisaDisciplinei(FisaDisciplinei fisaDisciplinei) {
+        System.out.println("S-a setat disciplina");
+        this.fisaDisciplinei = fisaDisciplinei;
     }
 }

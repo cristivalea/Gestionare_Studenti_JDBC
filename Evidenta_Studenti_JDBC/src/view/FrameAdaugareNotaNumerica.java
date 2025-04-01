@@ -1,7 +1,9 @@
-package view;//package view;
+package view;
 
 
 import model.Disciplina;
+
+
 import model.TipNota;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -138,22 +140,22 @@ public class FrameAdaugareNotaNumerica extends JFrame implements ActionListener 
 
         this.panelCautareNumeDisciplina = new JPanel();
         this.labelNumeDisciplina = new JLabel("Numele Disciplinei");
-        this.panelCautareNumeDisciplina.add(this.labelNumeDisciplina);
         this.txtNumeDisciplina = new JTextField(50);
+        this.panelCautareNumeDisciplina.add(this.labelNumeDisciplina);
         this.panelCautareNumeDisciplina.add(this.txtNumeDisciplina);
-        this.panelCautareDisciplina.add(this.panelCautareNumeDisciplina);
 
         this.panleButonCautareDisciplina = new JPanel();
         this.afisareDiscipline = new JLabel("                                                         ");
-        this.panleButonCautareDisciplina.add(this.afisareDiscipline);
+        this.panleButonCautareDisciplina.add(afisareDiscipline);
         this.butonCautareDisciplina = new ButonCautareDiscipline(this.txtNumeDisciplina, this.afisareDiscipline);
         this.butonCautareDisciplina.addActionListener(this);
-        this.panelCautareDisciplina.add(this.butonCautareDisciplina);
+        this.panleButonCautareDisciplina.add(this.butonCautareDisciplina);
 
+        this.panelCautareDisciplina.add(this.panelCautareNumeDisciplina);
+        this.panelCautareDisciplina.add(this.panleButonCautareDisciplina);
         this.mainPanel.add(this.panelCautareDisciplina);
 
         //nota examen
-
         this.panelNotaExame = new JPanel();
         this.txtNotaExamen = new JTextField(5);
         this.labelNotaExamen = new JLabel("Nota examen");
@@ -246,19 +248,23 @@ public class FrameAdaugareNotaNumerica extends JFrame implements ActionListener 
         this.mainPanel.add(this.panelDataExamen);
 
         this.panelButonAdaugare = new JPanel();
-        this.butonAdaugareNota = new ButonAdaugareNotaNumerica(butonTipNota, butonCautareStudent, butonCautareDisciplina, txtNotaExamen, txtNotaLaborator, txtNotaSeminar, txtNotaProiect, txtCoefPrezentaCurs, txtCoefPRezentaLab, txtCoefPrezentaSeminar, txtCoefPrezentaProiect, dataExamen );
-       this.butonAdaugareNota.addActionListener(this);
-       this.panelButonAdaugare.add(this.butonAdaugareNota);
-       this.mainPanel.add(this.panelButonAdaugare);
+//        this.butonAdaugareNota = new ButonAdaugareNotaNumerica(butonTipNota, );
+//        this.adaugareDsiciplina.addActionListener(this);
+//        this.panelAdaugareDisciplina.add(this.adaugareDsiciplina);
+//        this.mainPanel.add(this.panelAdaugareDisciplina);
+
 
 
         this.add(mainPanel);
         this.setVisible(true);
 
+
         this.pack();
         this.setSize(700, 800);
+
         this.pack();
         this.setSize(700, 500);
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
