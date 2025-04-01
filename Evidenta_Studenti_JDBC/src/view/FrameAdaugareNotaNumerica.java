@@ -88,7 +88,7 @@ public class FrameAdaugareNotaNumerica extends JFrame implements ActionListener 
     // main panel
     private JPanel mainPanel;
 
-    // panel buton adaugareNota;
+    private JPanel butonadaugareNota;
     private JPanel panelButonAdaugare;
     private ButonAdaugareNotaNumerica butonAdaugareNota;
 
@@ -247,32 +247,33 @@ public class FrameAdaugareNotaNumerica extends JFrame implements ActionListener 
         this.panelDataExamen.add(this.dataExamen);
         this.mainPanel.add(this.panelDataExamen);
 
-        this.panelButonAdaugare = new JPanel();
-//        this.butonAdaugareNota = new ButonAdaugareNotaNumerica(butonTipNota, );
+//        this.panelButonAdaugare = new JPanel();
+//        this.butonAdaugareNota = new ButonAdaugareNotaNumerica(butonTipNota, butonCautareStudent, butonCautareDisciplina, txtNotaExamen, txtNotaLaborator, txtNotaSeminar, txtNotaProiect, txtCoefPrezentaCurs, txtCoefPRezentaLab, txtCoefPrezentaSeminar, txtCoefPrezentaProiect, dataExamen);
 //        this.adaugareDsiciplina.addActionListener(this);
 //        this.panelAdaugareDisciplina.add(this.adaugareDsiciplina);
 //        this.mainPanel.add(this.panelAdaugareDisciplina);
 
-
-
+        // Configurare buton de adăugare notă
+        this.panelButonAdaugare = new JPanel();
+        this.butonAdaugareNota = new ButonAdaugareNotaNumerica(butonTipNota, butonCautareStudent, butonCautareDisciplina, txtNotaExamen, txtNotaLaborator, txtNotaSeminar, txtNotaProiect, txtCoefPrezentaCurs, txtCoefPRezentaLab, txtCoefPrezentaSeminar, txtCoefPrezentaProiect, dataExamen);
+        this.butonAdaugareNota.addActionListener(this);
+        this.panelButonAdaugare.add(this.butonAdaugareNota);
+        this.mainPanel.add(this.panelButonAdaugare);
         this.add(mainPanel);
         this.setVisible(true);
 
-
         this.pack();
-        this.setSize(700, 800);
-
-        this.pack();
-        this.setSize(700, 500);
+        this.setSize(900, 900);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent actionEvent) {
+    public void actionPerformed(ActionEvent e) {
 
-        ((Comand) actionEvent.getSource()).execute();
+        Comand comand = (Comand) e.getSource();
+        comand.execute();
     }
+
 
     public static void main(String[] args){
         new FrameAdaugareNotaNumerica();
