@@ -18,8 +18,6 @@ public class AdaugareNota implements Comand{
                 System.err.println("Formatul numelui de familie este gresit!");
                 return;
             }
-            System.out.println("Introduceti codul disciplinei la care se adauga nota: ");
-            String disciplina = scanner.next();
             for (int i = 0; i < Repository.getInstance().getStiudenti().size(); i++) {
                 if(nume.equals(Repository.getInstance().getStiudenti().get(i).getNumeFamilie())){
                     this.student = Repository.getInstance().getStiudenti().get(i);
@@ -30,8 +28,11 @@ public class AdaugareNota implements Comand{
                 Exception e = new Exception("Studentul nu a fost gasit");
                 throw e;
             }
+
+            System.out.println("Introduceti codul disciplinei la care se adauga nota: ");
+            int disciplina = scanner.nextInt();
             for (int j = 0; j < Repository.getInstance().getDiscipline().size(); j++){
-                if(disciplina.equals(Repository.getInstance().getDiscipline().get(j).getCodDisciplina())){
+                if(disciplina == Repository.getDiscipline().get(j).getCodDisciplina()){
                     this.disciplina = Repository.getInstance().getDiscipline().get(j);
                     break;
                 }
@@ -65,6 +66,7 @@ public class AdaugareNota implements Comand{
                         promovat = 1;
                     }
                     nota = new NotaNumerica(TipNota.N, this.student.getNrMatricol(), this.disciplina.getCodDisciplina(), dataExamen, notaNumerica, promovat);
+                    nota.adaugaNota();
                     break;
                 }
                 case 2:
@@ -85,6 +87,7 @@ public class AdaugareNota implements Comand{
                         promovat = 0;
                     }
                     nota = new NotaCalificativ(TipNota.N, this.student.getNrMatricol(), this.disciplina.getCodDisciplina(), dataExamen, tipCalificativ, promovat);
+                    nota.adaugaNota();
                     break;
                 }
                 case 3:
@@ -105,9 +108,9 @@ public class AdaugareNota implements Comand{
                         promovat = 0;
                     }
                     nota = new NotaCalificativAR(TipNota.N, this.student.getNrMatricol(), this.disciplina.getCodDisciplina(), dataExamen, tipCalificativ, promovat);
+                    nota.adaugaNota();
                     break;
                 }
             } // end switch
-       // Repository.getInstance().adaugareNota(this.student, nota);
     } // end execute
 }

@@ -88,9 +88,9 @@ public class FrameAdaugareNotaNumerica extends JFrame implements ActionListener 
     // main panel
     private JPanel mainPanel;
 
-    private JPanel butonadaugareNota;
+    //private JPanel butonAdaugareNota;
     private JPanel panelButonAdaugare;
-    private ButonAdaugareNotaNumerica butonAdaugareNota;
+   private ButonAdaugareNotaNumerica butonAdaugareNota;
 
     private JDatePickerImpl createDatePicker() {
         UtilDateModel model = new UtilDateModel();
@@ -261,17 +261,13 @@ public class FrameAdaugareNotaNumerica extends JFrame implements ActionListener 
         this.mainPanel.add(this.panelButonAdaugare);
         this.add(mainPanel);
         this.setVisible(true);
-
         this.pack();
         this.setSize(900, 900);
-
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void actionPerformed(ActionEvent e) {
-
-        Comand comand = (Comand) e.getSource();
-        comand.execute();
+    public void actionPerformed(ActionEvent actionEvent) {
+        ((Comand) actionEvent.getSource()).execute();
     }
 
 

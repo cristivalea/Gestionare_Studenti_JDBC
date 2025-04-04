@@ -1,6 +1,9 @@
 package model;
 
 import XMLProcess.ProcesareFisaDisciplinei;
+import main.AdaugareNota;
+import main.AdaugareStudent;
+import main.CautareDupaNume;
 import org.apache.poi.ss.formula.functions.T;
 
 import java.time.LocalDate;
@@ -69,10 +72,14 @@ public class Main {
         NotaCalificativAR.updateNota(TipCalificativAR.RESPINS, 107, "CTI024873");
     } // end main nota califictiv a/r
 
-    public static void main(String[] args) throws Exception{
+    public static void main8(String[] args) throws Exception{
        for(int i = 0; i < Repository.getInstance().getStiudenti().size(); i++){
            System.out.println(Repository.getInstance().getStiudenti().get(i));
        }
     }
 
+    public static void main(String[] args) throws Exception{
+        CautareDupaNume c = new CautareDupaNume();
+        c.execute();
+    }
 }
