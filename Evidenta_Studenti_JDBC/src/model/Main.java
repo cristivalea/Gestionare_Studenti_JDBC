@@ -1,9 +1,7 @@
 package model;
 
 import XMLProcess.ProcesareFisaDisciplinei;
-import main.AdaugareNota;
-import main.AdaugareStudent;
-import main.CautareDupaNume;
+import main.*;
 import org.apache.poi.ss.formula.functions.T;
 
 import java.time.LocalDate;
@@ -79,7 +77,7 @@ public class Main {
     }
 
     public static void main(String[] args) throws Exception{
-        CautareDupaNume c = new CautareDupaNume();
+        CautareDupaNumePrenumeDataNastere c = new CautareDupaNumePrenumeDataNastere();
         c.execute();
     }
 }
