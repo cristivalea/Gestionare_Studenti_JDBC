@@ -255,7 +255,7 @@ public class FrameAdaugareNotaNumerica extends JFrame implements ActionListener 
 
         // Configurare buton de adăugare notă
         this.panelButonAdaugare = new JPanel();
-        this.butonAdaugareNota = new ButonAdaugareNotaNumerica(butonTipNota, butonCautareStudent, butonCautareDisciplina, txtNotaExamen, txtNotaLaborator, txtNotaSeminar, txtNotaProiect, txtCoefPrezentaCurs, txtCoefPRezentaLab, txtCoefPrezentaSeminar, txtCoefPrezentaProiect, dataExamen);
+        this.butonAdaugareNota = new ButonAdaugareNotaNumerica(butonTipNota, afisareStudenti, afisareDiscipline, txtNotaExamen, txtNotaLaborator, txtNotaSeminar, txtNotaProiect, txtCoefPrezentaCurs, txtCoefPRezentaLab, txtCoefPrezentaSeminar, txtCoefPrezentaProiect, dataExamen);
         this.butonAdaugareNota.addActionListener(this);
         this.panelButonAdaugare.add(this.butonAdaugareNota);
         this.mainPanel.add(this.panelButonAdaugare);

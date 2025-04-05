@@ -23,7 +23,7 @@ public class NotaNumerica extends Nota{
 
 
 
-    public  static ArrayList<Nota> getNote(){
+    public static ArrayList<Nota> getNote(){
         ArrayList<Nota> noteNumerice = new ArrayList<Nota>();
         try{
             Statement st = DBConnection.getInstance().getConnection().createStatement();

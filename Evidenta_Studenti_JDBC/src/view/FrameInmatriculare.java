@@ -68,7 +68,6 @@ public class FrameInmatriculare extends JFrame implements ActionListener {
         this.mainPanel.setLayout(layout);
 
 
-
         this.panelNrMatricol = new JPanel();
         this.txtNrMatricol = new JTextField(50);
         this.txtNrMatricol.setEditable(false);

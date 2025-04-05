@@ -76,8 +76,12 @@ public class Main {
        }
     }
 
+    public static void main9(String[] args){
+        ModificareNume mn = new ModificareNume();
+        mn.execute();
+    }
     public static void main(String[] args) throws Exception{
-        CautareDupaNumePrenumeDataNastere c = new CautareDupaNumePrenumeDataNastere();
-        c.execute();
+        ModificarePrenume mn = new ModificarePrenume();
+        mn.execute();
     }
 }

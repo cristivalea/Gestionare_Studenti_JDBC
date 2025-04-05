@@ -81,6 +81,7 @@ public abstract class Nota {
 
     public abstract void setNotaFinala();
 
+
     public void setStudent(Student student) {
         this.student = student;
     }

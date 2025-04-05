@@ -1,6 +1,6 @@
 package view;
 
-import main.Comand;
+import view.Comand;
 import model.NotaNumerica;
 
 
@@ -9,14 +9,16 @@ import org.jdatepicker.impl.JDatePickerImpl;
 
 import javax.swing.*;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 
 public class ButonAdaugareNotaNumerica extends JButton implements Comand {
 
     private JComboBox<TipNota> tipNota;
-    private ButonCautare butonStudent;
-    private ButonCautareDiscipline butonDisciplina;
+    private JLabel labelStudent;
+    private JLabel labelDisciplina;
     private JTextField txtNotaExamen;
     private JTextField txtNotaLaborator;
     private JTextField txtNotaSeminar;
@@ -28,11 +30,11 @@ public class ButonAdaugareNotaNumerica extends JButton implements Comand {
     private JDatePickerImpl dataExamen;
 
 
-    public ButonAdaugareNotaNumerica(JComboBox<TipNota> tipNota, ButonCautare butonStudent, ButonCautareDiscipline butonDisciplina, JTextField txtNotaExamen, JTextField txtNotaLaborator, JTextField txtNotaSeminar, JTextField txtNotaProiect, JTextField txtCoefPrezentaCurs, JTextField txtCoefPrezentaLab, JTextField txtCoefPrezentaSeminar, JTextField txtCoefPrezentaProiect, JDatePickerImpl dataExamen) {
+    public ButonAdaugareNotaNumerica(JComboBox<TipNota> tipNota, JLabel labelStudent, JLabel labelDisciplina, JTextField txtNotaExamen, JTextField txtNotaLaborator, JTextField txtNotaSeminar, JTextField txtNotaProiect, JTextField txtCoefPrezentaCurs, JTextField txtCoefPrezentaLab, JTextField txtCoefPrezentaSeminar, JTextField txtCoefPrezentaProiect, JDatePickerImpl dataExamen) {
         super("Adauga Nota Numerica");
         this.tipNota = tipNota;
-        this.butonStudent = butonStudent;
-        this.butonDisciplina = butonDisciplina;
+        this.labelStudent = labelStudent;
+        this.labelDisciplina = labelDisciplina;
         this.txtNotaExamen = txtNotaExamen;
         this.txtNotaLaborator = txtNotaLaborator;
         this.txtNotaSeminar = txtNotaSeminar;
@@ -45,32 +47,90 @@ public class ButonAdaugareNotaNumerica extends JButton implements Comand {
     }
 
     public void execute() {
-        String tipDisciplina = tipNota.getSelectedItem().toString();
-        String codStudent = butonStudent.getText();
-        int codDisciplina = Integer.parseInt(butonDisciplina.getText());
-        int notaE = Integer.parseInt(txtNotaExamen.getText().trim());
-        int notaL = Integer.parseInt(txtNotaLaborator.getText().trim());
-        int notaS = Integer.parseInt(txtNotaSeminar.getText().trim());
-        int notaP = Integer.parseInt(txtNotaProiect.getText().trim());
-        double coefPC = Double.parseDouble(txtCoefPrezentaCurs.getText().trim());
-        double coefPL = Double.parseDouble(txtCoefPrezentaLab.getText().trim());
-        double coefPS = Double.parseDouble(txtCoefPrezentaSeminar.getText().trim());
-        double coefPP = Double.parseDouble(txtCoefPrezentaProiect.getText().trim());
-        String dataEx = dataExamen.toString();
+        String auxTipDisciplina = tipNota.getSelectedItem().toString();
+        if(auxTipDisciplina != null || auxTipDisciplina.length() > 1) {
+            String tipDisciplina = auxTipDisciplina;
+        }
+
+        String auxCodStudent = labelStudent.getText().trim();
+        int pozitieS = auxCodStudent.lastIndexOf(" ");
+        String codS = auxCodStudent.substring(pozitieS + 1).trim();
+        String codStudent = null;
+        if(codS != null && codS.length() > 1){
+            codStudent = codS;
+        }
+
+
+        String auxlabelDisciplina = labelDisciplina.getText().trim();
+//        System.err.println(auxlabelDisciplina);
+        int pozitie = auxlabelDisciplina.lastIndexOf(" ");
+        int cod = Integer.parseInt(auxlabelDisciplina.substring(pozitie + 1).trim());
+        System.err.println(cod);
+        int codDisciplina = cod;
+
+        String auxNotaE = txtNotaExamen.getText().trim();
+        int notaE= 0;
+        if(auxNotaE != null && auxNotaE.length() > 1){
+            notaE = Integer.parseInt(auxNotaE);
+        }
+
+        String auxNotaL = txtNotaLaborator.getText().trim();
+        int notaL = 0;
+        if(auxNotaL != null && auxNotaL.length() > 1) {
+            notaL = Integer.parseInt(auxNotaL);
+        }
+
+        String auxNotaS = txtNotaSeminar.getText().trim();
+        int notaS = 0;
+        if(auxNotaS != null && auxNotaS.length() > 1) {
+            notaS = Integer.parseInt(auxNotaS);
+        }
+
+        String auxNotaP = txtNotaProiect.getText().trim();
+        int notaP = 0;
+        if(auxNotaP != null && auxNotaP.length() > 1) {
+            notaP = Integer.parseInt(auxNotaP);
+        }
+
+        String auxCoefP = txtCoefPrezentaCurs.getText().trim();
+        double coefPC = 0;
+        if(auxCoefP != null && auxCoefP.length() > 1) {
+            coefPC = Double.parseDouble(auxCoefP);
+        }
+
+
+        double coefPL = 0;
+        String auxCoefPL = txtCoefPrezentaLab.getText().trim();
+        if(auxCoefPL != null && auxCoefPL.length() > 1) {
+            coefPL = Double.parseDouble(auxCoefPL);
+        }
+
+        double coefPS = 0;
+        String auxCoefPS = txtCoefPrezentaSeminar.getText().trim();
+        if(auxCoefPS != null && auxCoefPS.length() > 1) {
+            coefPS = Double.parseDouble(auxCoefPS);
+        }
+
+
+        double coefPP = 0;
+        String auxCoefPP = txtCoefPrezentaProiect.getText().trim();
+        if(auxCoefPP != null && auxCoefPP.length() > 1) {
+            coefPP = Double.parseDouble(auxCoefPP);
+        }
+
 
         int notaFinala = (int)(notaE * coefPC + notaL * coefPL + notaS * coefPS + notaP * coefPP);
         int promovat = notaFinala > 4 ? 1 : 0;
 
-        LocalDate dataE = null;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        try {
-            dataE = LocalDate.parse(dataEx, formatter);
-        } catch (Exception e) {
-            System.err.println("Eroare procesare data nastere: " + e.getMessage());
+        Date selectedDate = (Date) dataExamen.getModel().getValue();
+        if (selectedDate == null) {
+            System.err.println("Data examenului nu este selectată.");
             return;
         }
+        LocalDate dataE = selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         try {
             NotaNumerica notaNumerica = new NotaNumerica(TipNota.N, codStudent, codDisciplina, dataE, notaFinala, promovat);
+            System.out.println(notaNumerica.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -132,6 +132,16 @@ public class Student {
         }
     } // end update nume familie
 
+    public static void updatePrenume(String[] prenumeNou, String numarMatricol){
+        String str = "UPDATE studenti SET Prenume=" + "'" + prenumeNou + "'" + "WHERE Numar_Matricol=" + "'" + numarMatricol + "'";
+        try{
+            Statement st = DBConnection.getInstance().getConnection().createStatement();
+            st.execute(str);
+        }catch (SQLException sql){
+            DBConnection.logger.info(sql.getSQLState());
+        }
+    }// end update prenume
+
     public static void dataNastere(LocalDate dataN, String nrMatricol){
         String str = "UPDATE studenti SET Data_Nastere=" + "'" + dataN + "'" + "WHERE Numar_Matricol=" + "'" + nrMatricol + "'";
         try{
@@ -190,6 +200,18 @@ public class Student {
 
     public static ArrayList<String> getListaNrMatricole() {
         return listaNrMatricole;
+    }
+
+    public void setDataNAstere(LocalDate dataNAstere) {
+        this.dataNAstere = dataNAstere;
+    }
+
+    public void setNumeFamilie(String numeFamilie) {
+        this.numeFamilie = numeFamilie;
+    }
+
+    public void setPrenume(String[] prenume) {
+        this.prenume = prenume;
     }
 }
 

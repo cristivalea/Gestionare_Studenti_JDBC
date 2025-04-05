@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class DateLabelFormatter extends AbstractFormatter {
-    private String datePattern = "dd/M/yyyy";
+    private String datePattern = "yyyy-MM-dd";
     private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
 
     @Override

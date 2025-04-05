@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -145,5 +146,28 @@ public class Repository {
 
     public void stergeStudent(Student student) {
         return;
+    }
+    public static void updateDataNastere(LocalDate dataNoua, String numarMatricol){
+        for(Student s : getStiudenti()){
+            if(s.getNrMatricol().equals(numarMatricol)){
+                s.setDataNAstere(dataNoua);
+            }
+        }
+    }// end update data nastere
+
+    public static void updateNumefamilie(String numeNou, String numarMatricol){
+        for(Student s : getStiudenti()){
+            if(s.getNrMatricol().equals(numarMatricol)){
+                s.setNumeFamilie(numeNou);
+            }
+        }
+    }// end update nume de familie
+
+    public static void updatePrenume(String[] prenumeNoi, String numarMatricol){
+        for(Student s : getStiudenti()){
+            if(s.getNrMatricol().equals(numarMatricol)){
+                s.setPrenume(prenumeNoi);
+            }
+        }
     }
 } // end Repository
