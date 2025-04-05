@@ -102,8 +102,7 @@ public class NotaNumerica extends Nota{
             DBConnection.logger.info(sql.getSQLState());
         }
     } // end update nota
-
     public void setNotaFinala(){
-        this.valoare = notaFinala;
+        this.notaFinala = notaFinala;
     }
 }

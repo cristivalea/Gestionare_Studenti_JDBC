@@ -170,4 +170,23 @@ public class Repository {
             }
         }
     }
+
+    public static void adaugareNotaNumerica(NotaNumerica n, String nrMatricol, int codDsicipplina){
+        for(Student s : getStiudenti()){
+            for (Disciplina d : getDiscipline()){
+                System.out.println(s);
+                System.out.println(d);
+                if(s.getNrMatricol().equals(nrMatricol) && (d.getCodDisciplina() == codDsicipplina)){
+                    System.out.println(n + " " + nrMatricol + " " + codDsicipplina);
+                    n.setNotaFinala();
+                    note.add(n);
+                    n.adaugaNota();
+                    notifyObservers();
+                    break;
+                }
+            }
+        }
+    }// end adaugare nota numerica
+
+
 } // end Repository

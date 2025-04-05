@@ -81,7 +81,7 @@ public class Main {
         mn.execute();
     }
     public static void main(String[] args) throws Exception{
-        ModificarePrenume mn = new ModificarePrenume();
-        mn.execute();
+        NotaNumerica nn = new NotaNumerica(TipNota.N, "CTI022993", 100, LocalDate.of(2025, 04, 01), 8, 1);
+        Repository.adaugareNotaNumerica(nn, "CTI022993", 100);
     }
 }

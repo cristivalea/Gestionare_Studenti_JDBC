@@ -1,5 +1,6 @@
 package view;
 
+import model.Repository;
 import view.Comand;
 import model.NotaNumerica;
 
@@ -131,6 +132,7 @@ public class ButonAdaugareNotaNumerica extends JButton implements Comand {
         try {
             NotaNumerica notaNumerica = new NotaNumerica(TipNota.N, codStudent, codDisciplina, dataE, notaFinala, promovat);
             System.out.println(notaNumerica.toString());
+            Repository.adaugareNotaNumerica(notaNumerica, codStudent, codDisciplina);
         } catch (Exception e) {
             e.printStackTrace();
         }
