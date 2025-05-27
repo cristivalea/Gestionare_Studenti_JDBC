@@ -1,5 +1,8 @@
 package model;
 
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +17,8 @@ public class Repository {
     private static ArrayList<Nota> note = new ArrayList<Nota>();
     private static ArrayList<Observer> observers = new ArrayList<Observer>();
     private static Repository instance=null;
+    private static ArrayList<String> profesoriTitulari = new ArrayList<String>();
+    private static ArrayList<String> specializari = new ArrayList<String>();
 
     private Repository() throws Exception {
         discipline = loadDiscipline();
@@ -97,6 +102,35 @@ public class Repository {
 
     public ArrayList<Student> loadStudenti() throws Exception{
         return Student.getStudenti();
+    }
+
+    public static ArrayList<String> loadProfesoriTitulari() throws Exception{
+        Statement st = DBConnection.getInstance().getConnection().createStatement();
+        ResultSet rezultat = st.executeQuery("SELECT * FROM `titulari_discipline`");
+        while(rezultat.next()){
+            String numeProfesor = rezultat.getString("Nume_Profesori_Titulari");
+            int codDisciplina = rezultat.getInt("Cod_Disciplina");
+            String codSpecializare = rezultat.getString("Cod_Specializare");
+            String profesor = numeProfesor + " " + codDisciplina + " " + codSpecializare + "\n";
+            profesoriTitulari.add(profesor);
+        }
+        return profesoriTitulari;
+    }
+
+    public static ArrayList<String> loadSpecializari() throws Exception{
+        Statement st = DBConnection.getInstance().getConnection().createStatement();
+        ResultSet rezultat = st.executeQuery("SELECT * FROM `specializare`");
+        while (rezultat.next()){
+            String codSpecializare = rezultat.getString("Cod_Specializare");
+            String denumire = rezultat.getString("Denumire");
+            Date sqlDate = rezultat.getDate("Start_Valabilitate");
+            LocalDate dataV = sqlDate.toLocalDate();
+            Date sqlDateEnd = rezultat.getDate("End_Valabilitate");
+            LocalDate dataE = sqlDate.toLocalDate();
+            String specializare = codSpecializare + " " + denumire + "\n";
+            specializari.add(specializare);
+        }
+        return specializari;
     }
 
     public static ArrayList<Disciplina> getDiscipline() {

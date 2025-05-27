@@ -28,6 +28,7 @@ public class ParsareJSON {
         try {
             JsonNode root = objectMapper.readTree(new File(fileName));
             //extrage numele
+            String nrMatricol = root.get("Numar Matricol").asText();
             String nume = root.get("Nume").asText();
 
             //extrage lista de prenume
@@ -50,7 +51,7 @@ public class ParsareJSON {
                     Integer.parseInt(dataInmatriculareNode.get("Zi").asText())
             );
             String calePoza = root.get("Cale_poza").asText();
-            Student s = new Student(nume, dataNastere, dataInmatriculare, prenume.toArray(new String[0]));
+            Student s = new Student(nrMatricol, nume, prenume.toArray(new String[0]),dataNastere, dataInmatriculare);
 
             s.setCale_poza(calePoza);
             System.out.println(s);
@@ -77,6 +78,7 @@ public class ParsareJSON {
                     if(denumireFisier.endsWith(".json")){
                         Student s = ParsareJSON.getStudent(f.getAbsolutePath());
                         studenti.add(s);
+                        s.adaugareStudent();
                     }
                 }
             }
