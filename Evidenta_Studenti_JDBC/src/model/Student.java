@@ -26,10 +26,10 @@ public class Student {
         if(nrMatricol == null || numeFamilie == null || prenume.length == 0 || dataNAstere == null || dataInmatriculare == null){
             return;
         }
-        if(RegularExpresion.RegularExpresionNrMatricol(nrMatricol) == false){
-            FormatException fnm = new FormatException(nrMatricol,FormatException.NR_MATRICOL_FORMAT);
-            throw fnm;
-        }
+//        if(RegularExpresion.RegularExpresionNrMatricol(nrMatricol) == false){
+//            FormatException fnm = new FormatException(nrMatricol,FormatException.NR_MATRICOL_FORMAT);
+//            throw fnm;
+//        }
         this.nrMatricol = nrMatricol;
         listaNrMatricole.add(this.nrMatricol);
         if(!RegularExpresion.RegularExpresionNumePrenume(numeFamilie)){

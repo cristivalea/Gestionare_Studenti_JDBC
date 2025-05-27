@@ -188,5 +188,35 @@ public class Repository {
         }
     }// end adaugare nota numerica
 
+    public static void adaugareNotaCalificativAr(NotaCalificativAR nar, String nrMAtricol, int codDisciplina){
+        for(Student s : getStiudenti()){
+            for(Disciplina d : getDiscipline()){
+//                System.out.println(s);
+//                System.out.println(d);
+                if(s.getNrMatricol().equals(nrMAtricol) && d.getCodDisciplina() == codDisciplina){
+                    System.out.println(nar + " " + nrMAtricol + " " + codDisciplina);
+                    nar.setNotaFinala();
+                    note.add(nar);
+                    nar.adaugaNota();
+                    notifyObservers();
+                    break;
+                }
+            }
+        }
+    } // adaugare nota calificativ admis/respins
+
+    public static void adaugareNotaCalificativ(NotaCalificativ nc, String nrMatricol, int codDisciplina){
+        for(Student s : getStiudenti()){
+            for(Disciplina d : getDiscipline()){
+                if(s.getNrMatricol().equals(nrMatricol) && d.getCodDisciplina() == codDisciplina){
+                    nc.setNotaFinala();
+                    note.add(nc);
+                    nc.adaugaNota();
+                    notifyObservers();
+                }
+            }
+        }
+    } // end adaugare nota calificativ
+
 
 } // end Repository

@@ -139,7 +139,7 @@ public class FrameAdaugareNotaCalificativ extends JFrame implements ActionListen
 
         // buton adaugare Nota
         this.panelButonAdaugare = new JPanel();
-        this.butonAdaugareNota = new ButonAdaugareCalificativ(this.butonTipNota, this.butonCautareStudent, this.butonCautareDisciplina, this.txtCalificativ, this.dataExamen);
+        this.butonAdaugareNota = new ButonAdaugareCalificativ(this.butonTipNota, afisareStudenti, afisareDiscipline, this.txtCalificativ, this.dataExamen);
         this.butonAdaugareNota.addActionListener(this);
         this.panelButonAdaugare.add(this.butonAdaugareNota);
         this.mainPanel.add(this.panelButonAdaugare);
