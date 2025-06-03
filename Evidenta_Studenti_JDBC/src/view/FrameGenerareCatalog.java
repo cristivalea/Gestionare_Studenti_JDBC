@@ -39,6 +39,10 @@ public class FrameGenerareCatalog extends JFrame implements ActionListener {
     private UtilDateModel modelDataExame;
     private JDatePickerImpl dataExamen;
 
+    //panel buton
+    private JPanel panelButonGenerareCatalog;
+    private ButonGenerareCatalog butonGenerareCatalog;
+
     // main panel
     private JPanel mainPanel;
 
@@ -113,6 +117,13 @@ public class FrameGenerareCatalog extends JFrame implements ActionListener {
         this.panelDataExamen.add(this.dataExamen);
         this.mainPanel.add(this.panelDataExamen);
 
+        //adaugare buton
+        this.panelButonGenerareCatalog = new JPanel();
+        this.butonGenerareCatalog = new ButonGenerareCatalog(this.labelAnStudiu, this.labelDisciplina, this.labelProfesoriTitulari, this.labelSpecializare, this.dataExamen);
+        this.butonGenerareCatalog.addActionListener(this);
+        this.panelButonGenerareCatalog.add(butonGenerareCatalog);
+        this.mainPanel.add(this.panelButonGenerareCatalog);
+
         //adaugare main panel
         this.add(mainPanel);
         this.setVisible(true);
@@ -121,7 +132,7 @@ public class FrameGenerareCatalog extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     public void actionPerformed(ActionEvent actionEvent) {
-//        ((Comand) actionEvent.getSource()).execute();
+         ((Comand) actionEvent.getSource()).execute();
 
     }
 
